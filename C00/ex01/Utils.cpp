@@ -6,12 +6,17 @@
 /*   By: hamad <hamad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 22:28:33 by hamad             #+#    #+#             */
-/*   Updated: 2025/03/03 22:35:39 by hamad            ###   ########.fr       */
+/*   Updated: 2025/03/04 13:17:17 by hamad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <iostream>
 #include "Utils.hpp"
+
+bool ft_isdigit(char c)
+{
+    return (c >= '0' && c <= '9');
+}
 
 bool validateContact(std::string fName, std::string lName, std::string nName, std::string pNumber, std::string darkestSecret){
     bool empty = false;
@@ -42,6 +47,14 @@ bool validateContact(std::string fName, std::string lName, std::string nName, st
     }
     if (empty)
         return true;
+    for (char c : pNumber)
+    {
+        if (!ft_isdigit(c))
+        {
+            std::cout << "Phone number must contain only digits" << std::endl;
+            return true;
+        }
+    }
     return false;
 }
 
