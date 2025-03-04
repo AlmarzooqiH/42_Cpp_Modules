@@ -6,7 +6,7 @@
 /*   By: hamad <hamad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 20:59:10 by hamad             #+#    #+#             */
-/*   Updated: 2025/03/03 22:49:43 by hamad            ###   ########.fr       */
+/*   Updated: 2025/03/04 10:24:27 by hamad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ class PhoneBook
         PhoneBook();
         void addContact(std::string fName, std::string lName, std::string nName, std::string pNumber, std::string darkestSecert);
         void displayContacts();
+        void formattedContact(std::string str);
 };
 
 #endif
