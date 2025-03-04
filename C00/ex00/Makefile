@@ -1,5 +1,5 @@
 PROGRAM_NAME= megaphone
-COMPILER = g++
+COMPILER = cc
 CPP_VERSION = c++98
 FLAGS = -Wall -Wextra -Werror -std=$(CPP_VERSION)
 SRC = megaphone.cpp

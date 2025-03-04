@@ -1,5 +1,5 @@
 PROGRAM_NAME= nokia_3310
-COMPILER = c++
+COMPILER = cc
 CPP_VERSION = c++98
 FLAGS = -Wall -Wextra -Werror -std=$(CPP_VERSION)
 SRC = main.cpp Utils.cpp Contact.cpp PhoneBook.cpp

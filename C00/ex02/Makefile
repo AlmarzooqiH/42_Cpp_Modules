@@ -1,8 +1,8 @@
 PROGRAM_NAME= money
-COMPILER = c++
+COMPILER = cc
 CPP_VERSION = c++98
 FLAGS = -Wall -Wextra -Werror -std=$(CPP_VERSION)
-SRC = tests.cpp
+SRC = Account.cpp tests.cpp
 OBJ = $(SRC:.cpp=.o)
 
 all: $(PROGRAM_NAME)
