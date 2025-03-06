@@ -6,13 +6,14 @@
 /*   By: hamad <hamad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 21:59:39 by hamad             #+#    #+#             */
-/*   Updated: 2025/03/04 10:32:34 by hamad            ###   ########.fr       */
+/*   Updated: 2025/03/06 06:49:32 by hamad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "PhoneBook.hpp"
 #include <iostream>
 #include <string>
+#include "PhoneBook.hpp"
+#include "Utils.hpp"
 
 PhoneBook::PhoneBook(){
     contact_count = 0;
@@ -40,7 +41,7 @@ void	PhoneBook::formattedContact(std::string str)
 {
 	if (str.length() > 10)
 	{
-		std::cout << str.substr(0, 9) << ".";
+		std::cout << str.substr(0, 9) << ".|";
 		return ;
 	}
 	for (int i = 0; i < 10 - str.length(); i++)
@@ -70,10 +71,14 @@ void    PhoneBook::displayContacts()
     }
 	contact_index = -1;
 	do
-	{
+	{	
 		std::cout << "Enter the ID of the contact you want to view: " << std::endl;
 		std::cin >> contact_index;
+		if (std::cin.fail())
+		{
+			std::cin.clear();
+			std::cin.ignore();
+		}
 	}while (contact_index < 1 || contact_index > contact_count);
-	contact_index--;
-	this->contacts[contact_index].toString();
+	this->contacts[contact_index - 1].toString();
 }

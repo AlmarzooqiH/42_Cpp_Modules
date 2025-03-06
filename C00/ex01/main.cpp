@@ -6,7 +6,7 @@
 /*   By: hamad <hamad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 21:03:23 by hamad             #+#    #+#             */
-/*   Updated: 2025/03/03 23:36:24 by hamad            ###   ########.fr       */
+/*   Updated: 2025/03/06 06:57:49 by hamad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int main(void)
     {
         std::string command, fName, lName, nName, pNumber, darkestSecret;
         std::cout << "Enter a command: (ADD (A), SEARCH (S), EXIT (E))" << std::endl;
-        std::cin >> command;
+        std::getline(std::cin, command);
         if (command.empty())
             continue;
         if (command == "EXIT" || command == "E")
@@ -34,15 +34,15 @@ int main(void)
         else if (command == "ADD" || command == "A")
         {
             std::cout << "Enter first name: ";
-            std::cin >> fName;
+            std::getline(std::cin, fName);
             std::cout << "Enter last name: ";
-            std::cin >> lName;
+            std::getline(std::cin, lName);
             std::cout << "Enter nickname: ";
-            std::cin >> nName;
+            std::getline(std::cin, nName);
             std::cout << "Enter phone number: ";
-            std::cin >> pNumber;
+            std::getline(std::cin, pNumber);
             std::cout << "Enter darkest secret: ";
-            std::cin >> darkestSecret;
+            std::getline(std::cin, darkestSecret);
             if (validateContact(fName, lName, nName, pNumber, darkestSecret))
                 continue;
             phoneBook.addContact(fName, lName, nName, pNumber, darkestSecret);
@@ -50,6 +50,10 @@ int main(void)
         else if (command == "SEARCH" || command == "S")
         {
             phoneBook.displayContacts();
+        }
+        else
+        {
+            std::cout << "Invalid command." << std::endl;
         }
     }
     return (0);
