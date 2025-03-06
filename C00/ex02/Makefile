@@ -11,7 +11,7 @@ $(PROGRAM_NAME): $(OBJ)
 	$(COMPILER) $(FLAGS) -o $(PROGRAM_NAME) $(OBJ)
 
 clean:
-	rm -rf *.o *.out *.gch .vscode *.txt *.log
+	rm -rf *.o *.out *.gch .vscode *.txt
 
 fclean: clean
 	rm -rf $(PROGRAM_NAME)
