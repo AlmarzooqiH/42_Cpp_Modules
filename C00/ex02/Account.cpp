@@ -6,7 +6,7 @@
 /*   By: hamad <hamad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 00:19:13 by hamad             #+#    #+#             */
-/*   Updated: 2025/03/04 14:04:47 by hamad            ###   ########.fr       */
+/*   Updated: 2025/03/06 07:35:53 by hamad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,10 @@
 #include <ctime>
 
 static int account_id = 0;
+int	Account::_nbAccounts = 0;
+int	Account::_totalAmount = 0;
+int	Account::_totalNbDeposits = 0;
+int	Account::_totalNbWithdrawals = 0;
 
 Account::Account(void)
 {
@@ -51,7 +55,9 @@ Account::~Account(void)
 
 void    Account::_displayTimestamp(void)
 {
-    std::cout << "[CurrentDate_CurrentTime] ";
+    std::time_t currentTime = std::time(NULL);
+    std::tm *localTime = std::localtime(&currentTime);
+    std::cout << "[" << localTime->tm_year + 1900 << localTime->tm_mon + 1 << localTime->tm_mday << "_" << localTime->tm_hour << localTime->tm_min << localTime->tm_sec << "]";
 }
 
 void	Account::makeDeposit(int deposit){
