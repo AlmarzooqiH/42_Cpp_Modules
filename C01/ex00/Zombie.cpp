@@ -10,3 +10,17 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <iostream>
+#include "Zombie.hpp"
+
+void    Zombie::announce(void){
+        std::cout << name << ":\tBraiiiiiiinnnzzzZ..." << std::endl;
+}
+
+void    Zombie::setName(std::string name){
+        this->name = name;
+}
+
+std::string     Zombie::getName(void){
+        return (name);
+}

@@ -1,8 +1,8 @@
-PROGRAM_NAME= money
+PROGRAM_NAME= rotten_human
 COMPILER = c++
 CPP_VERSION = c++98
 FLAGS = -Wall -Wextra -Werror -std=$(CPP_VERSION)
-SRC = Account.cpp tests.cpp
+SRC = main.cpp Zombie.cpp newZombie.cpp randomChump.cpp
 OBJ = $(SRC:.cpp=.o)
 
 all: $(PROGRAM_NAME)
