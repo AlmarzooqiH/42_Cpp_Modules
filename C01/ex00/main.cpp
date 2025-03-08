@@ -10,16 +10,15 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <iostream>
 #include "Zombie.hpp"
 Zombie*	newZombie(std::string name);
 void    randomChump(std::string name);
 
 int main(void)
 {
-    Zombie *zombie = newZombie("Zombie1");
-    zombie->announce();
-    randomChump("Zombie2");
-    delete zombie;
+    Zombie *larry = newZombie("Larry");
+    larry->announce();
+    randomChump("Bob");
+    delete larry;
     return (0);
 }

@@ -10,9 +10,13 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <iostream>
 #include "Zombie.hpp"
 
+Zombie::Zombie(){}
+Zombie::~Zombie(){
+        std::cout << name << ":\tOmae Wa Mou Shindeiru\nNANIIIIIII?!?!?!?" << std::endl;
+}
+Zombie::Zombie(std::string name){this->name = name;}
 void    Zombie::announce(void){
         std::cout << name << ":\tBraiiiiiiinnnzzzZ..." << std::endl;
 }
