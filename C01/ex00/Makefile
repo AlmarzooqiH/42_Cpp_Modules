@@ -10,6 +10,9 @@ all: $(PROGRAM_NAME)
 $(PROGRAM_NAME): $(OBJ)
 	$(COMPILER) $(FLAGS) -o $(PROGRAM_NAME) $(OBJ)
 
+%.o: %.cpp
+	$(COMPILER) $(FLAGS) -c $< -o $@
+
 clean:
 	rm -rf *.o *.out *.gch .vscode *.txt
 
