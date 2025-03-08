@@ -9,6 +9,9 @@
 /*   Updated: 2025/03/06 18:12:16 by hamalmar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+#ifndef ZOMBIE_HPP
+#define ZOMBIE_HPP
+
 #include <iostream>
 class Zombie{
 
@@ -18,10 +21,10 @@ class Zombie{
 	public:
 		Zombie();
 		~Zombie();
-		Zombie*		newZombie(std::string name);
-		Zombie*		zombieHorde( int N, std::string name );
-		void		randomChump(std::string name);
+		Zombie(std::string name);
 		void		announce(void);
 		void		setName(std::string name);
 		std::string	getName(void);
-};
+	};
+	Zombie*	zombieHorde(int N, std::string name);
+#endif
