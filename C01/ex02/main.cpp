@@ -6,12 +6,12 @@
 /*   By: hamad <hamad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/08 14:54:03 by hamad             #+#    #+#             */
-/*   Updated: 2025/03/08 14:59:00 by hamad            ###   ########.fr       */
+/*   Updated: 2025/03/18 22:45:55 by hamad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <iostream>
-
+#include <string>
 int main(void)
 {
     std::string str = "HI THIS IS BRAIN";
