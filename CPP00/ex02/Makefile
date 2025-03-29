@@ -1,4 +1,4 @@
-PROGRAM_NAME= money
+PROGRAM_NAME= corporate_life
 COMPILER = c++
 CPP_VERSION = c++98
 FLAGS = -Wall -Wextra -Werror -std=$(CPP_VERSION)

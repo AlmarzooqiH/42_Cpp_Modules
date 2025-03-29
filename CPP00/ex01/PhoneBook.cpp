@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   PhoneBook.cpp                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hamad <hamad@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hamalmar <hamalmar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 21:59:39 by hamad             #+#    #+#             */
-/*   Updated: 2025/03/06 06:49:32 by hamad            ###   ########.fr       */
+/*   Updated: 2025/03/29 15:24:43 by hamalmar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,25 +16,25 @@
 #include "Utils.hpp"
 
 PhoneBook::PhoneBook(){
-    contact_count = 0;
-    contact_pos = 0;
+	contact_count = 0;
+	contact_pos = 0;
 }
 
-void PhoneBook::addContact(std::string fName, std::string lName, std::string nName, std::string pNumber, std::string darkestSecert){
-    if (contact_count == max_contacts)
-    {
-        int pos = contact_pos % max_contacts;
-        contacts[pos].setFName(fName);
-        contacts[pos].setLName(lName);
-        contacts[pos].setNickName(nName);
-        contacts[pos].setPNumber(pNumber);
-        contacts[pos].setDarkestSecret(darkestSecert);
-        contact_pos++;
-        return ;
-    }
-    contacts[contact_pos] = Contact(fName, lName, nName, pNumber, darkestSecert); 
-    contact_pos++;
-    contact_count++;
+void	PhoneBook::addContact(std::string fName, std::string lName, std::string nName, std::string pNumber, std::string darkestSecert){
+	if (contact_count == max_contacts)
+	{
+		int pos = contact_pos % max_contacts;
+		contacts[pos].setFName(fName);
+		contacts[pos].setLName(lName);
+		contacts[pos].setNickName(nName);
+		contacts[pos].setPNumber(pNumber);
+		contacts[pos].setDarkestSecret(darkestSecert);
+		contact_pos++;
+		return ;
+	}
+	contacts[contact_pos] = Contact(fName, lName, nName, pNumber, darkestSecert); 
+	contact_pos++;
+	contact_count++;
 }
 
 void	PhoneBook::formattedContact(std::string str)
@@ -49,26 +49,26 @@ void	PhoneBook::formattedContact(std::string str)
 	std::cout << str << "|";
 }
 
-void    PhoneBook::displayContacts()
+void	PhoneBook::displayContacts()
 {
 	if (contact_count == 0)
 	{
 		std::cout << "No contacts available." << std::endl;
 		return ;
 	}
-    int	contact_index = 0;
+	int	contact_index = 0;
 	std::cout << "        ID|     fName|     lName|  NickName|" << std::endl;
-    for (Contact contact: contacts)
-    {
+	for (int i = 0; i < contact_count % max_contacts; i++)
+	{
 		if (contact_index == contact_count)
 			break;
 		formattedContact(std::to_string(contact_index + 1));
-		formattedContact(contact.getFName());
-		formattedContact(contact.getLName());
-		formattedContact(contact.getNickName());
+		formattedContact(contacts[i].getFName());
+		formattedContact(contacts[i].getLName());
+		formattedContact(contacts[i].getNickName());
 		std::cout << std::endl;
-        contact_index++;
-    }
+		contact_index++;
+	}
 	contact_index = -1;
 	do
 	{	
