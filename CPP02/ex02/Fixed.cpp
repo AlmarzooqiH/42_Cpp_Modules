@@ -6,7 +6,7 @@
 /*   By: hamad <hamad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 15:05:29 by hamad             #+#    #+#             */
-/*   Updated: 2025/04/01 17:20:35 by hamad            ###   ########.fr       */
+/*   Updated: 2025/04/01 18:00:57 by hamad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,10 +50,12 @@ Fixed::~Fixed(){
 	std::cout << "Destructor called" << std::endl;
 	this->rawBits = 0;
 }
+
 void Fixed::setRawBits(int const raw){
 	std::cout << "setRawBits member function called" << std::endl;
 	this->rawBits = raw;
 }
+
 int Fixed::getRawBits(void) const {
 	std::cout << "getRawBits member function called" << std::endl;
 	return (this->rawBits);
@@ -64,4 +66,62 @@ float	Fixed::toFloat(void) const {
 }
 int		Fixed::toInt(void) const {
 	return (this->rawBits >> bits);
+}
+
+bool	Fixed::operator>(const Fixed& f){
+	return (this->rawBits > f.getRawBits());
+}
+
+bool	Fixed::operator<(const Fixed& f){
+	return (this->rawBits < f.getRawBits());
+}
+
+bool	Fixed::operator>=(const Fixed& f){
+	return (this->rawBits >= f.getRawBits());
+}
+
+bool	Fixed::operator<=(const Fixed& f){
+	return (this->rawBits <= f.getRawBits());
+}
+
+bool	Fixed::operator==(const Fixed& f){
+	return (this->rawBits == f.getRawBits());
+}
+
+bool	Fixed::operator!=(const Fixed& f){
+	return (this->rawBits != f.getRawBits());
+}
+
+Fixed	Fixed::operator+(const Fixed& f){
+	return (Fixed(this->bits + f.getRawBits()));
+}
+
+Fixed	Fixed::operator-(const Fixed& f){
+	return (Fixed(this->bits - f.getRawBits()));
+}
+
+Fixed	Fixed::operator*(const Fixed& f){
+	return (Fixed(this->bits * f.getRawBits()));
+}
+
+Fixed	Fixed::operator/(const Fixed& f){
+	if (f.getRawBits() == 0)
+	{
+		std::cout << "Cannot divide by 0" << std::endl;
+		return Fixed(0);
+	}
+	return (Fixed(this->bits / f.getRawBits()));
+}
+
+Fixed	Fixed::operator++(int increment){
+	return (Fixed(this->bits + increment));
+}
+Fixed	Fixed::operator++(){
+	return (Fixed(this->bits + 1));
+}
+Fixed	Fixed::operator--(int decrement){
+	return (Fixed(this->bits - decrement));
+}
+Fixed	Fixed::operator--(){
+	return (Fixed(this->bits - 1));
 }
