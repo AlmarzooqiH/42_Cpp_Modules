@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   PhoneBook.cpp                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hamalmar <hamalmar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hamad <hamad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 21:59:39 by hamad             #+#    #+#             */
-/*   Updated: 2025/03/29 15:24:43 by hamalmar         ###   ########.fr       */
+/*   Updated: 2025/04/02 15:55:26 by hamad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void	PhoneBook::displayContacts()
 	}
 	int	contact_index = 0;
 	std::cout << "        ID|     fName|     lName|  NickName|" << std::endl;
-	for (int i = 0; i < contact_count % max_contacts; i++)
+	for (int i = 0; i < contact_count; i++)
 	{
 		if (contact_index == contact_count)
 			break;
