@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Fixed.cpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hamad <hamad@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hamalmar <hamalmar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 15:05:29 by hamad             #+#    #+#             */
-/*   Updated: 2025/04/01 17:20:35 by hamad            ###   ########.fr       */
+/*   Updated: 2025/04/02 23:51:46 by hamalmar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ int Fixed::getRawBits(void) const {
 }
 
 float	Fixed::toFloat(void) const {
-	return (float)((this->rawBits / (1 << this->bits)));
+	return ((((float)this->rawBits) / (1 << this->bits)));
 }
 int		Fixed::toInt(void) const {
 	return (this->rawBits >> bits);
