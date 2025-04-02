@@ -6,7 +6,7 @@
 /*   By: hamalmar <hamalmar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 15:05:29 by hamad             #+#    #+#             */
-/*   Updated: 2025/04/02 00:26:38 by hamalmar         ###   ########.fr       */
+/*   Updated: 2025/04/02 12:14:09 by hamalmar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,17 +114,23 @@ Fixed	Fixed::operator/(const Fixed& f){
 
 //Post increment
 Fixed	Fixed::operator++(int){
-
+	Fixed old = *this;
+	this->rawBits++;
+	return (old);
 }
 //Pre increment
-Fixed	Fixed::operator++(void){
-	
+Fixed&	Fixed::operator++(){
+	this->rawBits++;
+	return (*this);
 }
 //Post decrement
 Fixed	Fixed::operator--(int){
-
+	Fixed old = *this;
+	this->rawBits--;
+	return (old);
 }
 //Pre Decrement
-Fixed	Fixed::operator--(void){
-
+Fixed&	Fixed::operator--(){
+	this->rawBits--;
+	return (*this);
 }
