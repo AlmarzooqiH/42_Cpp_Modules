@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Fixed.cpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hamalmar <hamalmar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hamad <hamad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 15:05:29 by hamad             #+#    #+#             */
-/*   Updated: 2025/04/02 12:14:09 by hamalmar         ###   ########.fr       */
+/*   Updated: 2025/04/02 14:00:04 by hamad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,4 +133,18 @@ Fixed	Fixed::operator--(int){
 Fixed&	Fixed::operator--(){
 	this->rawBits--;
 	return (*this);
+}
+
+Fixed&	Fixed::min(Fixed &a, Fixed &b){
+	return ((a < b) ? a : b);
+}
+const Fixed&	Fixed::min(const Fixed &a, const Fixed &b){
+	return ((a.getRawBits() < b.getRawBits()) ? a : b);
+}
+Fixed&	Fixed::max(Fixed &a, Fixed &b){
+	return ((a > b) ? a : b);
+}
+const Fixed&	Fixed::max(const Fixed &a, const Fixed &b){
+	return ((a.getRawBits() > b.getRawBits()) ? a : b);
+
 }
