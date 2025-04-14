@@ -1,7 +1,7 @@
 PROGRAM_NAME= i_want_problems_always
 COMPILER = c++
 CPP_VERSION = c++98
-FLAGS = -Wall -Wextra -Werror -std=$(CPP_VERSION)
+FLAGS = -std=$(CPP_VERSION) -Wall -Wextra -Werror
 SRC = main.cpp Weapon.cpp HumanA.cpp HumanB.cpp
 OBJ = $(SRC:.cpp=.o)
 

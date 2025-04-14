@@ -1,7 +1,7 @@
 PROGRAM_NAME= yapper
 COMPILER = c++
 CPP_VERSION = c++98
-FLAGS = -Wall -Wextra -Werror -std=$(CPP_VERSION)
+FLAGS = -std=$(CPP_VERSION) -Wall -Wextra -Werror
 SRC = main.cpp Harl.cpp
 OBJ = $(SRC:.cpp=.o)
 
