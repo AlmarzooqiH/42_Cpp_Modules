@@ -2,7 +2,7 @@ PROGRAM_NAME = Evolution_Is_Crazy
 COMPILER = c++
 CPP_VERSION = c++98
 FLAGS = -std=$(CPP_VERSION) -Wall -Wextra -Werror 
-SRC = main.cpp ClapTrap.cpp
+SRC = main.cpp ClapTrap.cpp ScavTrap.cpp
 OBJ = $(SRC:.cpp=.o)
 
 all: $(PROGRAM_NAME)

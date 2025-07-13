@@ -6,20 +6,24 @@
 /*   By: hamalmar <hamalmar@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/13 12:42:50 by hamalmar          #+#    #+#             */
-/*   Updated: 2025/07/13 15:47:10 by hamalmar         ###   ########.fr       */
+/*   Updated: 2025/07/14 00:11:17 by hamalmar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ClapTrap.hpp"
 
 ClapTrap::ClapTrap(){
+	std::cout << "ClapTrap defualt constructor" << std::endl;
 	this->hp = 10;
 	this->energy = 10;
 	this->damage = 0;
 }
-ClapTrap::~ClapTrap(){}
+ClapTrap::~ClapTrap(){
+	std::cout << "ClapTrap deconstructor" << std::endl;
+}
 
 ClapTrap::ClapTrap(const std::string name){
+	std::cout << "ClapTrap name constructor" << std::endl;
 	this->name = name;
 	this->hp = 10;
 	this->energy = 10;
@@ -34,6 +38,7 @@ ClapTrap::ClapTrap(const ClapTrap& right){
 }
 
 ClapTrap& ClapTrap::operator=(const ClapTrap& right){
+	std::cout << "ClapTrap copy assignment operator called" << std::endl;
 	if (this != &right){
 	this->name = right.name;
 	this->hp = right.hp;
@@ -79,3 +84,34 @@ void	ClapTrap::beRepaired(unsigned int amount){
 	std::cout << "ClapTrap " << this->name << "has reparied " << amount << " of HP" << std::endl;
 }
 
+std::string	ClapTrap::getName() const{
+	return (this->name);
+}
+
+int	ClapTrap::getHP() const{
+	return (this->hp);
+}
+
+int	ClapTrap::getEnergy() const{
+	return (this->energy);
+}
+
+int	ClapTrap::getDamage() const{
+	return (this->damage);
+}
+
+void	ClapTrap::setName(const std::string newName){
+	this->name = newName;
+}
+
+void	ClapTrap::setHP(int newHp){
+	this->hp = newHp;
+}
+
+void	ClapTrap::setEnergy(int newEnergy){
+	this->energy = newEnergy;
+}
+
+void	ClapTrap::setDamage(int newDamage){
+	this->damage = newDamage;
+}
