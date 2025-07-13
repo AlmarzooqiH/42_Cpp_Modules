@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Fixed.hpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hamad <hamad@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hamalmar <hamalmar@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 10:22:43 by hamad             #+#    #+#             */
-/*   Updated: 2025/04/01 17:03:59 by hamad            ###   ########.fr       */
+/*   Updated: 2025/07/13 09:23:29 by hamalmar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ class	Fixed{
 	private:
 		int rawBits;
 		const static int bits = 8;
+
 	public:
 		Fixed();
 		Fixed(const Fixed &f);

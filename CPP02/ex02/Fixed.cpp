@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Fixed.cpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hamalmar <hamalmar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hamalmar <hamalmar@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 15:05:29 by hamad             #+#    #+#             */
-/*   Updated: 2025/04/02 23:57:51 by hamalmar         ###   ########.fr       */
+/*   Updated: 2025/07/13 10:44:23 by hamalmar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,44 +25,48 @@ Fixed::Fixed(const Fixed& f)
 
 Fixed::Fixed(const int i)
 {
-	// std::cout << "Int constructor called" << std::endl;
+	std::cout << "Int constructor called" << std::endl;
 	this->rawBits = i << bits;
 }
 
 Fixed::Fixed(const float f)
 {
-	// std::cout << "Float constructor called" << std::endl;
+	std::cout << "Float constructor called" << std::endl;
 	this->rawBits = roundf(f * (1 << this->bits));
 }
+
 Fixed& Fixed::operator=(const Fixed& other){
-	// std::cout << "Copy assignment operator called" << std::endl;
-	this->rawBits = other.rawBits;	
+	std::cout << "Copy assignment operator called" << std::endl;
+	if (this != &other) {
+		this->rawBits = other.getRawBits();
+	}
 	return (*this);
 }
 
 std::ostream &operator<<(std::ostream &out, const Fixed &fixed) {
     out << fixed.toFloat();
-    return out;
+    return (out);
 }
 
 Fixed::~Fixed(){
-	// std::cout << "Destructor called" << std::endl;
+	std::cout << "Destructor called" << std::endl;
 	this->rawBits = 0;
 }
 
 void Fixed::setRawBits(int const raw){
-	// std::cout << "setRawBits member function called" << std::endl;
+	std::cout << "setRawBits member function called" << std::endl;
 	this->rawBits = raw;
 }
 
 int Fixed::getRawBits(void) const {
-	// std::cout << "getRawBits member function called" << std::endl;
+	std::cout << "getRawBits member function called" << std::endl;
 	return (this->rawBits);
 }
 
 float	Fixed::toFloat(void) const {
 	return ((((float)this->rawBits) / (1 << this->bits)));
 }
+
 int		Fixed::toInt(void) const {
 	return (this->rawBits >> bits);
 }
@@ -100,7 +104,7 @@ Fixed	Fixed::operator-(const Fixed& f){
 }
 
 Fixed	Fixed::operator*(const Fixed& f){
-	return (Fixed(this->rawBits * f.getRawBits()));
+	return (Fixed(toFloat() * f.toFloat()));
 }
 
 Fixed	Fixed::operator/(const Fixed& f){
@@ -109,7 +113,7 @@ Fixed	Fixed::operator/(const Fixed& f){
 		std::cout << "Cannot divide by 0" << std::endl;
 		return Fixed(0);
 	}
-	return (Fixed(this->rawBits / f.getRawBits()));
+	return (Fixed(toFloat() / f.toFloat()));
 }
 
 //Post increment
