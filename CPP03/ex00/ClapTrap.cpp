@@ -6,7 +6,7 @@
 /*   By: hamalmar <hamalmar@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/13 12:42:50 by hamalmar          #+#    #+#             */
-/*   Updated: 2025/07/13 15:47:10 by hamalmar         ###   ########.fr       */
+/*   Updated: 2025/07/14 00:16:24 by hamalmar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,3 +79,34 @@ void	ClapTrap::beRepaired(unsigned int amount){
 	std::cout << "ClapTrap " << this->name << "has reparied " << amount << " of HP" << std::endl;
 }
 
+std::string	ClapTrap::getName() const{
+	return (this->name);
+}
+
+int	ClapTrap::getHP() const{
+	return (this->hp);
+}
+
+int	ClapTrap::getEnergy() const{
+	return (this->energy);
+}
+
+int	ClapTrap::getDamage() const{
+	return (this->damage);
+}
+
+void	ClapTrap::setName(const std::string newName){
+	this->name = newName;
+}
+
+void	ClapTrap::setHP(int newHp){
+	this->hp = newHp;
+}
+
+void	ClapTrap::setEnergy(int newEnergy){
+	this->energy = newEnergy;
+}
+
+void	ClapTrap::setDamage(int newDamage){
+	this->damage = newDamage;
+}
