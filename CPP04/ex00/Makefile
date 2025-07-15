@@ -1,8 +1,8 @@
-PROGRAM_NAME = Evolution_Is_Crazy
+PROGRAM_NAME = TraitsAreDifferent
 COMPILER = c++
 CPP_VERSION = c++98
 FLAGS = -std=$(CPP_VERSION) -Wall -Wextra -Werror 
-SRC = main.cpp Animal.cpp Cat.cpp Dog.cpp
+SRC = main.cpp Animal.cpp Cat.cpp Dog.cpp WrongAnimal.cpp WrongCat.cpp
 OBJ = $(SRC:.cpp=.o)
 
 all: $(PROGRAM_NAME)

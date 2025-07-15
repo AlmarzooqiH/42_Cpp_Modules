@@ -22,6 +22,6 @@ class Dog: public Animal{
 	Dog(const std::string animalType);
 	Dog(const Dog& right);
 	Dog& operator=(const Dog& right);
-	void	makeSound();
+	void	makeSound() const;
 };
 #endif

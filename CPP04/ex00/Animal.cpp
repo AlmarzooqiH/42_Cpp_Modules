@@ -37,7 +37,7 @@ Animal&	Animal::operator=(const Animal& right){
 	return (*this);
 }
 
-void	Animal::makeSound(){
+void	Animal::makeSound() const{
 	std::cout << "Animal Noises!!!" << std::endl;
 }
 
