@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hamad <hamad@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hamalmar <hamalmar@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 00:06:03 by hamad             #+#    #+#             */
-/*   Updated: 2025/03/19 01:37:29 by hamad            ###   ########.fr       */
+/*   Updated: 2025/07/21 21:48:16 by hamalmar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@ int main(int ac, char **av)
         {
             if (av[i][0] =='\0' || av[i] == NULL)
             {
-                std::cout << "Please provide a valid entry" << std::endl;
-                std::cout << INPUT_ERROR << std::endl;
+                std::cerr << "Please provide a valid entry" << std::endl;
+                std::cerr << INPUT_ERROR << std::endl;
                 return (1);
             }
         }
@@ -32,7 +32,7 @@ int main(int ac, char **av)
         std::ofstream fileout((fileName + ".replace").c_str());
         if (!filein.is_open())
         {
-            std::cout << "Couldn't open the file" << std::endl;
+            std::cerr << "Couldn't open the file" << std::endl;
             return (1);
         }
         std::string line;
@@ -56,12 +56,14 @@ int main(int ac, char **av)
                 end++;
             }
             fileout << new_line << std::endl;
-            new_line.clear();}
+            new_line.clear();
+        }
         filein.close();
         fileout.close();
 
     }else{
-        std::cout << INPUT_ERROR << std::endl;
+        std::cerr << INPUT_ERROR << std::endl;
+        return (1);
     }
-    return 0;
+    return (0);
 }
