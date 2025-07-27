@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "Bureaucrat.hpp"
+#include "AForm.hpp"
 
 Bureaucrat::Bureaucrat()
 	: name("Hamad"), grade(1)
@@ -35,6 +36,14 @@ Bureaucrat& Bureaucrat::operator=(const Bureaucrat& right){
 	return (*this);
 }
 
+const char	*Bureaucrat::GradeTooHighException::what() const throw(){
+	return ("Grade Is Too High!");
+}
+
+const char	*Bureaucrat::GradeTooLowException::what() const throw(){
+	return ("Grade Is Too Low!");
+}
+
 std::string Bureaucrat::getName(void) const{
 	return (this->name);
 }
@@ -42,6 +51,7 @@ std::string Bureaucrat::getName(void) const{
 int	Bureaucrat::getGrade(void) const{
 	return (this->grade);
 }
+
 
 void	Bureaucrat::setGrade(int newGrade){
 	if (newGrade < 1) {throw GradeTooHighException();}
@@ -64,13 +74,14 @@ void	Bureaucrat::decrementGrade(void){
 	this->grade++;
 }
 
-const char	*Bureaucrat::GradeTooHighException::what() const throw(){
-	return ("Grade Is Too High!");
+void	Bureaucrat::signForm(AForm& f){
+	try{
+		f.beSigned(*this);
+		std::cout << this->name << " Signed " << f.getName() << std::endl;
+	} catch (std::exception& err){
+		std::cout << this->name << " couldn’t sign " << f.getName() << " because " << err.what() << std::endl;	}
 }
 
-const char	*Bureaucrat::GradeTooLowException::what() const throw(){
-	return ("Grade Is Too Low!");
-}
 std::ostream&	operator<<(std::ostream& os, const Bureaucrat& b) {
 	os << b.getName() << ", bureaucrat grade " << b.getGrade();
 	return (os);

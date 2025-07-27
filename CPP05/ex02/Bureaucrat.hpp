@@ -15,7 +15,7 @@
 
 # include <iostream>
 
-class Form;
+class AForm;
 
 class Bureaucrat{
 
@@ -44,7 +44,7 @@ class Bureaucrat{
         void        setGrade(int newGrade);
         void        incrementGrade(void);
         void        decrementGrade(void);
-        void        signForm(Form& f);
+        void        signForm(AForm& f);
         friend std::ostream& operator<<(std::ostream& os, const Bureaucrat& b);
 };
 

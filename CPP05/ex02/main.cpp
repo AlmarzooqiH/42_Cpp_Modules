@@ -11,14 +11,14 @@
 /* ************************************************************************** */
 
 #include "Bureaucrat.hpp"
-#include "Form.hpp"
+#include "AForm.hpp"
 
 
 int main(void){
 	Bureaucrat hamad;
 	Bureaucrat larry("Larry", 5);
-	Form roi;
-	Form renewID("ID Renewal", 150, 1);
+	AForm roi;
+	AForm renewID("ID Renewal", 150, 1);
 
 	try {
 		hamad.signForm(roi);

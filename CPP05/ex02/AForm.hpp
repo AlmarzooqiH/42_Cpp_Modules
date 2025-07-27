@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Form.hpp                                           :+:      :+:    :+:   */
+/*   AForm.hpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hamalmar <hamalmar@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -17,7 +17,7 @@
 
 class Bureaucrat;
 
-class Form{
+class AForm{
 
     private:
         const std::string name;
@@ -25,11 +25,11 @@ class Form{
         const int reqGrade;
         const int reqGradeToExec;
     public:
-        Form();
-        Form(const Form& right);
-        Form& operator=(const Form& right);
-        Form (const std::string name, int reqGrade, int reqGradeToExec);
-        ~Form();
+        AForm();
+        AForm(const AForm& right);
+        AForm& operator=(const AForm& right);
+        AForm (const std::string name, int reqGrade, int reqGradeToExec);
+        ~AForm();
 
         std::string getName(void) const;
         bool        getIsSigned(void) const;
@@ -37,7 +37,9 @@ class Form{
         int         getReqGradeToExec(void) const;
         
         void    beSigned(Bureaucrat& b);
-        friend std::ostream& operator<<(std::ostream& os, const Form& f);
+        friend std::ostream& operator<<(std::ostream& os, const AForm& f);
+
+        virtual void execute(Bureaucrat const & executor) const = 0;
 
         class GradeTooLowException: public std::exception{
             public:
