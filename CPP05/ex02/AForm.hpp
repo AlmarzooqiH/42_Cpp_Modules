@@ -14,6 +14,8 @@
 # define FORM_HPP
 
 # include <iostream>
+# include <fstream>
+# include <string>
 
 class Bureaucrat;
 
@@ -29,7 +31,7 @@ class AForm{
         AForm(const AForm& right);
         AForm& operator=(const AForm& right);
         AForm (const std::string name, int reqGrade, int reqGradeToExec);
-        ~AForm();
+        virtual ~AForm();
 
         std::string getName(void) const;
         bool        getIsSigned(void) const;
@@ -47,6 +49,11 @@ class AForm{
         };
 
         class GradeTooHighException: public std::exception{
+            public:
+                const char *what() const throw();
+        };
+
+        class FormNotSignedException: public std::exception{
             public:
                 const char *what() const throw();
         };

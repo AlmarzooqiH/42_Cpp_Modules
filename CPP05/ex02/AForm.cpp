@@ -45,6 +45,10 @@ const char	*AForm::GradeTooLowException::what() const throw(){
 	return ("Grade Is Too Low!");
 }
 
+const char *AForm::FormNotSignedException::what() const throw(){
+	return ("The Form Is Not Signed!");
+}
+
 std::string AForm::getName(void) const {return (this->name);}
 bool		AForm::getIsSigned(void) const {return (this->isSigned);}
 int			AForm::getReqGrade(void) const {return (this->reqGrade);}
@@ -60,7 +64,7 @@ void	AForm::beSigned(Bureaucrat& b){
 		std::cout << "This form has been already signed" << std::endl;
 		return ;
 	}
-	if (b.getGrade() > this->reqGradeToExec){
+	if (b.getGrade() > this->reqGrade){
 		throw AForm::GradeTooLowException();
 	}
 	this->isSigned = true;

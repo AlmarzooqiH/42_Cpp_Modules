@@ -14,6 +14,7 @@
 # define BUREAUCRAT_HPP
 
 # include <iostream>
+# include <string>
 
 class AForm;
 
@@ -39,6 +40,7 @@ class Bureaucrat{
         ~Bureaucrat();
         Bureaucrat(const Bureaucrat &right);
         Bureaucrat& operator=(const Bureaucrat &right);
+        void executeForm(AForm const & form) const;
         std::string getName(void) const;
         int         getGrade(void) const;
         void        setGrade(int newGrade);

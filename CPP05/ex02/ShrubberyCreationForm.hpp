@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SHRUBBERYCREATIONFORM
-# define SHRUBBERYCREATIONFORM
+#ifndef SHRUBBERYCREATIONFORM_HPP
+# define SHRUBBERYCREATIONFORM_HPP
 
 # include <iostream>
 # include "AForm.hpp"
@@ -20,13 +20,19 @@ class Bureaucrat;
 
 class ShrubberyCreationForm: public AForm{
 
+	private:
+		std::string target;
+
 	public:
 		ShrubberyCreationForm();
+		ShrubberyCreationForm(const std::string newTarget);
 		ShrubberyCreationForm(const ShrubberyCreationForm& right);
 		ShrubberyCreationForm& operator=(const ShrubberyCreationForm& right);
 		~ShrubberyCreationForm();
 
-		void	execute(Bureaucrat const &executor) const;
+		std::string	getTarget(void) const;
+		void		setTarget(const std::string newTarget);
+		void		execute(Bureaucrat const &executor) const;
 };
 
 #endif
