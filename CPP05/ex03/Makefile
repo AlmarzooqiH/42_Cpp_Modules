@@ -3,7 +3,8 @@ COMPILER = c++
 STD_VERSION = c++98
 FLAGS = -std=$(STD_VERSION) -Wall -Wextra -Werror
 
-SRC = main.cpp Bureaucrat.cpp Form.cpp
+SRC = main.cpp Bureaucrat.cpp AForm.cpp ShrubberyCreationForm.cpp \
+		RobotomyRequestForm.cpp PresidentialPardonForm.cpp Intern.cpp
 OBJS = $(SRC:.cpp=.o)
 
 all: $(PROGRAM_NAME)

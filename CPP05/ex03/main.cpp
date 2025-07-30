@@ -6,18 +6,6 @@
 /*   By: hamalmar <hamalmar@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/27 19:14:52 by hamalmar          #+#    #+#             */
-/*   Updated: 2025/07/27 19:14:52 by hamalmar         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: hamalmar <hamalmar@student.42abudhabi.a    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/27 19:14:52 by hamalmar          #+#    #+#             */
 /*   Updated: 2025/07/30 12:00:00 by hamalmar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
@@ -29,6 +17,7 @@
 #include "ShrubberyCreationForm.hpp"
 #include "RobotomyRequestForm.hpp"
 #include "PresidentialPardonForm.hpp"
+#include "Intern.hpp"
 
 int main(void){
     std::srand(std::time(NULL));
@@ -36,9 +25,11 @@ int main(void){
     Bureaucrat hamad("Hamad", 1);
     Bureaucrat ahmed("Ahmed", 50);
     Bureaucrat larry("Larry", 145);
+    Intern     slave;
+
     AForm *shrubbery = new ShrubberyCreationForm("Collect Tax");
     AForm *bender    = new RobotomyRequestForm("Transform Into A Bender");
-    AForm *evadeTax  = new PresidentialPardonForm("Tax Evader");
+    AForm *taxEvader  = slave.makeForm("p", "Tax Evader");
 
     try{
         hamad.executeForm(*shrubbery);
@@ -59,15 +50,15 @@ int main(void){
     ahmed.executeForm(*bender);
     hamad.executeForm(*bender);
 
-    larry.signForm(*evadeTax);
-    ahmed.signForm(*evadeTax);
-    ahmed.executeForm(*evadeTax);
-    hamad.signForm(*evadeTax);
-    hamad.executeForm(*evadeTax);
+    larry.signForm(*taxEvader);
+    ahmed.signForm(*taxEvader);
+    ahmed.executeForm(*taxEvader);
+    hamad.signForm(*taxEvader);
+    hamad.executeForm(*taxEvader);
 
     delete shrubbery;
     delete bender;
-    delete evadeTax;
+    delete taxEvader;
     return (0);
 }
 

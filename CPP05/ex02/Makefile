@@ -1,9 +1,10 @@
-PROGRAM_NAME = PoliticsIsAss
+PROGRAM_NAME = executive_order
 COMPILER = c++
 STD_VERSION = c++98
 FLAGS = -std=$(STD_VERSION) -Wall -Wextra -Werror
 
-SRC = main.cpp Bureaucrat.cpp AForm.cpp ShrubberyCreationForm.cpp
+SRC = main.cpp Bureaucrat.cpp AForm.cpp ShrubberyCreationForm.cpp \
+		RobotomyRequestForm.cpp PresidentialPardonForm.cpp
 OBJS = $(SRC:.cpp=.o)
 
 all: $(PROGRAM_NAME)
