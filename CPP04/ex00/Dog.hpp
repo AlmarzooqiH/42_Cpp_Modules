@@ -17,11 +17,11 @@
 
 class Dog: public Animal{
 	public:
-	Dog();
-	~Dog();
-	Dog(const std::string animalType);
-	Dog(const Dog& right);
-	Dog& operator=(const Dog& right);
-	void	makeSound() const;
+		Dog();
+		~Dog();
+		Dog(const std::string animalType);
+		Dog(const Dog& right);
+		Dog& operator=(const Dog& right);
+		void	makeSound() const;
 };
 #endif

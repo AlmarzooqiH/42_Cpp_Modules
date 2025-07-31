@@ -15,7 +15,7 @@
 #include "WrongCat.hpp"
 
 int main(void){
-	std::cout << "Inproper Polymopirsm" << std::endl;
+	std::cout << "Inproper Polymopirsm Test Started!" << std::endl << std::endl;
 	const WrongAnimal* wrong_meta = new WrongAnimal();
 	const WrongAnimal* wrong_cat = new WrongCat();
 
@@ -26,7 +26,8 @@ int main(void){
 
 	delete wrong_meta;
 	delete wrong_cat;
-	std::cout << "Proper Polymopirsm" << std::endl;
+	std::cout << "Inproper Polymopirsm Completed!" << std::endl << std::endl;
+	std::cout << "Proper Polymopirsm Test Started!" << std::endl;
 	const Animal* meta = new Animal();
 	const Animal* cat = new Cat();
 	const Animal* dog = new Dog();
@@ -35,6 +36,7 @@ int main(void){
 	cat->makeSound();
 	dog->makeSound();
 	meta->makeSound();
+	std::cout << "Proper Polymopirsm Test Completed!" << std::endl << std::endl;
 	delete meta;
 	delete cat;
 	delete dog;

@@ -18,20 +18,20 @@
 class Animal{
 
 	protected:
-	std::string type;
+		std::string type;
 
 	public:
-	Animal();
-	virtual ~Animal();
-	Animal(const std::string animalType);
-	Animal(const Animal& right);
-	Animal& operator=(const Animal& right);
-	virtual void	makeSound() const;
+		Animal();
+		virtual ~Animal();
+		Animal(const std::string animalType);
+		Animal(const Animal& right);
+		Animal& operator=(const Animal& right);
+		virtual void	makeSound() const;
 
-	//Getters
-	std::string getType() const;
-	
-	//Setters
-	void setType(const std::string newType);
+		//Getters
+		std::string getType() const;
+
+		//Setters
+		void setType(const std::string newType);
 };
 #endif

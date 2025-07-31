@@ -15,6 +15,7 @@
 #include "WrongCat.hpp"
 
 int main(void){
+	std::cout << "Animal Selfawareness Test Started!" << std::endl << std::endl;
 	const Cat* leo = new Cat();
 	const Dog *bobby = new Dog();
 	Brain& leo_brain = leo->getBrain();
@@ -31,25 +32,25 @@ int main(void){
 	const Dog* larry = new Dog(*bobby);
 	Brain& larry_brain = larry->getBrain();
 
-	std::cout << "Before change" << std::endl;
+	std::cout << std::endl << "Animal Ideas Before Changing" << std::endl;
 	std::cout << "Bobby's idea at index 0: " << bobby_brain.getIdea(0) << std::endl;
-	std::cout << "Larry's idea at index 0: " << larry_brain.getIdea(0) << std::endl;
-	std::cout << "After change" << std::endl;
+	std::cout << "Larry's idea at index 0: " << larry_brain.getIdea(0) << std::endl << std::endl;
+	std::cout << "Animal Ideas After Changing" << std::endl;
 	larry_brain.setIdea(0, "I hate that guy!");
 	std::cout << "Bobby's idea at index 0: " << bobby_brain.getIdea(0) << std::endl;
-	std::cout << "Larry's idea at index 0: " << larry_brain.getIdea(0) << std::endl;
+	std::cout << "Larry's idea at index 0: " << larry_brain.getIdea(0) << std::endl << std::endl;
 
 	const Cat* dosa = new Cat(*leo);
 	Brain& dosa_brain = dosa->getBrain();
 
-	std::cout << "Before change" << std::endl;
+	std::cout << "Animal Ideas Before Changing" << std::endl;
 	std::cout << "Leo's idea at index 0: " << leo_brain.getIdea(0) << std::endl;
-	std::cout << "Dosa's idea at index 0: " << dosa_brain.getIdea(0) << std::endl;
-	std::cout << "After change" << std::endl;
+	std::cout << "Dosa's idea at index 0: " << dosa_brain.getIdea(0) << std::endl << std::endl;
+	std::cout << "Animal Ideas After Changing" << std::endl;
 	dosa_brain.setIdea(0, "I kinda hate that guy!");
 	std::cout << "Leo's idea at index 0: " << leo_brain.getIdea(0) << std::endl;
-	std::cout << "Dosa's idea at index 0: " << dosa_brain.getIdea(0) << std::endl;
-	
+	std::cout << "Dosa's idea at index 0: " << dosa_brain.getIdea(0) << std::endl << std::endl;
+	std::cout << "Animal Selfawareness Test Finished!" << std::endl << std::endl;
 	delete leo;
 	delete bobby;
 	delete larry;
