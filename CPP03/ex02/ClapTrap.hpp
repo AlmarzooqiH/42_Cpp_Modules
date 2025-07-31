@@ -6,7 +6,7 @@
 /*   By: hamalmar <hamalmar@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/13 10:58:58 by hamalmar          #+#    #+#             */
-/*   Updated: 2025/07/13 23:57:55 by hamalmar         ###   ########.fr       */
+/*   Updated: 2025/07/31 19:36:46 by hamalmar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,32 +15,22 @@
 
 # include <iostream>
 
-class	ClapTrap{
+class ClapTrap{
 
 	protected:
-	std::string	name;
-	int			hp;
-	int			energy;
-	int			damage;
+		std::string	name;
+		int			hp;
+		int			energy;
+		int			damage;
+		unsigned int			maxHP;
+		unsigned int			maxEnergy;
 
 	public:
-	ClapTrap();
-	ClapTrap(const std::string name);
-	ClapTrap(const ClapTrap& right);
-	ClapTrap& operator=(const ClapTrap& right);
-	~ClapTrap();
-	
-	//Getters
-	std::string	getName() const;
-	int	getHP() const;
-	int	getEnergy() const;
-	int	getDamage() const;
-
-	//Setters
-	void	setName(const std::string newName);
-	void	setHP(int newHp);
-	void	setEnergy(int newEnergy);
-	void	setDamage(int newDamage);
+		ClapTrap();
+		ClapTrap(const std::string name);
+		ClapTrap(const ClapTrap& right);
+		ClapTrap& operator=(const ClapTrap& right);
+		~ClapTrap();
 
 	/*			Methods			 */
 	void	attack(const std::string& target);

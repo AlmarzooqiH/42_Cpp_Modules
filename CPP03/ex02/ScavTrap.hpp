@@ -16,14 +16,14 @@
 #include "ClapTrap.hpp"
 
 class ScavTrap: public ClapTrap{
-
 	public:
-	ScavTrap();
-	ScavTrap(const std::string name);
-	ScavTrap(const ScavTrap& right);
-	ScavTrap& operator=(const ScavTrap& right);
-	~ScavTrap();
-	void	guardGate();
+		ScavTrap();
+		ScavTrap(const std::string name);
+		ScavTrap(const ScavTrap& right);
+		ScavTrap& operator=(const ScavTrap& right);
+		~ScavTrap();
+		void	attack(const std::string& target);
+		void	guardGate();
 };
 
 #endif

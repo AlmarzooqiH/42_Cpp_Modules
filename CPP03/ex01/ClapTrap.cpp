@@ -6,30 +6,32 @@
 /*   By: hamalmar <hamalmar@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/13 12:42:50 by hamalmar          #+#    #+#             */
-/*   Updated: 2025/07/31 15:30:14 by hamalmar         ###   ########.fr       */
+/*   Updated: 2025/07/31 19:45:03 by hamalmar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ClapTrap.hpp"
 
 ClapTrap::ClapTrap(){
-	std::cout << "ClapTrap defualt constructor" << std::endl;
 	this->name = "ClapTrap";
 	this->hp = 10;
 	this->energy = 10;
 	this->damage = 0;
+	this->maxHP = 10;
+	this->maxEnergy = 10;
 }
-
 ClapTrap::~ClapTrap(){
-	std::cout << "ClapTrap deconstructor" << std::endl;
+	std::cout << "ClapTrap destructor" << std::endl;
 }
 
 ClapTrap::ClapTrap(const std::string name){
-	std::cout << "ClapTrap name constructor" << std::endl;
+	std::cout << "ClapTrap name consturctor" << std::endl;
 	this->name = name;
 	this->hp = 10;
 	this->energy = 10;
 	this->damage = 0;
+	this->maxHP = 10;
+	this->maxEnergy = 10;
 }
 
 ClapTrap::ClapTrap(const ClapTrap& right){
@@ -37,15 +39,18 @@ ClapTrap::ClapTrap(const ClapTrap& right){
 	this->hp = right.hp;
 	this->damage = right.damage;
 	this->energy = right.energy;
+	this->maxHP = right.maxHP;
+	this->maxEnergy = right.maxEnergy;
 }
 
 ClapTrap& ClapTrap::operator=(const ClapTrap& right){
-	std::cout << "ClapTrap copy assignment operator called" << std::endl;
 	if (this != &right){
 	this->name = right.name;
 	this->hp = right.hp;
 	this->damage = right.damage;
 	this->energy = right.energy;
+	this->maxHP = right.maxHP;
+	this->maxEnergy = right.maxEnergy;
 	}
 	return (*this);
 }
@@ -68,8 +73,10 @@ void ClapTrap::takeDamage(unsigned int amount){
 	std::cout << "ClapTrap " << this->name << " is dead." << std::endl;
 	return ;
 	}
-	this->hp -= amount;
-	std::cout << "ClapTrap " << this->name << "has taken " << amount << " of damange, " << "HP now is: " << this->hp << std::endl;
+	this->hp = ((this->hp - amount) <= 0) ? 0 : this->hp - amount;
+	if (this->hp <= 0)
+		this->hp = 0;
+	std::cout << "ClapTrap " << this->name << " has taken " << amount << " of damange, " << "HP now is: " << this->hp << std::endl;
 }
 
 void	ClapTrap::beRepaired(unsigned int amount){
@@ -81,39 +88,7 @@ void	ClapTrap::beRepaired(unsigned int amount){
 		std::cout << "ClapTrap " << this->name << " has run of energy" << std::endl;
 		return ;
 	}
-	this->hp += amount;
+	this->hp = ((this->hp + amount) > this->maxHP) ? 10 : this->hp + amount;
 	this->energy--;
-	std::cout << "ClapTrap " << this->name << "has reparied " << amount << " of HP" << std::endl;
-}
-
-std::string	ClapTrap::getName() const{
-	return (this->name);
-}
-
-int	ClapTrap::getHP() const{
-	return (this->hp);
-}
-
-int	ClapTrap::getEnergy() const{
-	return (this->energy);
-}
-
-int	ClapTrap::getDamage() const{
-	return (this->damage);
-}
-
-void	ClapTrap::setName(const std::string newName){
-	this->name = newName;
-}
-
-void	ClapTrap::setHP(int newHp){
-	this->hp = newHp;
-}
-
-void	ClapTrap::setEnergy(int newEnergy){
-	this->energy = newEnergy;
-}
-
-void	ClapTrap::setDamage(int newDamage){
-	this->damage = newDamage;
+	std::cout << "ClapTrap " << this->name << " has reparied " << amount << " of HP" << std::endl;
 }

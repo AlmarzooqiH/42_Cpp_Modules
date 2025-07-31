@@ -6,7 +6,7 @@
 /*   By: hamalmar <hamalmar@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/13 15:57:19 by hamalmar          #+#    #+#             */
-/*   Updated: 2025/07/31 15:29:13 by hamalmar         ###   ########.fr       */
+/*   Updated: 2025/07/31 19:46:33 by hamalmar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ ScavTrap::ScavTrap(): ClapTrap(){
 	this->hp = 100;
 	this->energy = 50;
 	this->damage = 20;
+	this->maxHP = 100;
+	this->maxEnergy = 50;
 }
 
 ScavTrap::ScavTrap(const ScavTrap& right): ClapTrap(right){
@@ -27,6 +29,8 @@ ScavTrap::ScavTrap(const ScavTrap& right): ClapTrap(right){
 	this->hp = right.hp;
 	this->damage = right.damage;
 	this->energy = right.energy;
+	this->maxHP = 100;
+	this->maxEnergy = 50;
 }
 
 ScavTrap::~ScavTrap(){
@@ -38,6 +42,8 @@ ScavTrap::ScavTrap(const std::string name): ClapTrap(name){
 	this->hp = 100;
 	this->energy = 50;
 	this->damage = 20;
+	this->maxHP = 100;
+	this->maxEnergy = 50;
 }
 
 ScavTrap& ScavTrap::operator=(const ScavTrap& right){
@@ -47,10 +53,35 @@ ScavTrap& ScavTrap::operator=(const ScavTrap& right){
 		this->hp = right.hp;
 		this->damage = right.damage;
 		this->energy = right.energy;
+		this->maxHP = right.maxHP;
+		this->maxEnergy = right.maxEnergy;
 	}
 	return (*this);
 }
 
+void	ScavTrap::attack(const std::string& target){
+	if (this->hp <= 0){
+	std::cout << "ScavTrap " << this->name << " is dead." << std::endl;
+	return ;
+	}
+	else if (this->energy <= 0){
+		std::cout << "ScavTrap " << this->name << " has run of energy" << std::endl;
+		return ;
+	}
+	this->energy--;
+	std::cout << "ScavTrap " << this->name << " attacks " << target << ", causing " << this->damage << " points of damage!" << std::endl;
+
+}
+
 void	ScavTrap::guardGate(){
+	if (this->hp <= 0){
+	std::cout << "ScavTrap " << this->name << " is dead." << std::endl;
+
+		return ;
+	}
+	if (this->energy <= 0){
+		std::cout << "ScavTrap " << this->name << " has run of energy" << std::endl;
+		return ;
+	}
 	std::cout << "ScavTrap " << this->name << " is now in Gate keeper mode." << std::endl;
 }

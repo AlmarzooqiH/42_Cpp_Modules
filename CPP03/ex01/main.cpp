@@ -6,7 +6,7 @@
 /*   By: hamalmar <hamalmar@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/13 15:40:40 by hamalmar          #+#    #+#             */
-/*   Updated: 2025/07/31 14:32:59 by hamalmar         ###   ########.fr       */
+/*   Updated: 2025/07/31 19:31:35 by hamalmar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ int	main(void){
 	bob.beRepaired(10);
 	bob.takeDamage(2);
 	bob.guardGate();
-	darwin.setName("Darwin");
 	darwin.takeDamage(101);
 	return (0);
 }

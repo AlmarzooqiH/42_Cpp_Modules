@@ -18,6 +18,8 @@ FragTrap::FragTrap(): ClapTrap(){
 	this->hp = 100;
 	this->energy = 100;
 	this->damage = 30;
+	this->maxHP = 100;
+	this->maxEnergy = 100;
 }
 
 FragTrap::~FragTrap(){
@@ -29,6 +31,8 @@ FragTrap::FragTrap(std::string name): ClapTrap(name) {
 	this->hp = 100;
 	this->energy = 100;
 	this->damage = 30;
+	this->maxHP = 100;
+	this->maxEnergy = 100;
 }
 
 FragTrap::FragTrap(const FragTrap& right): ClapTrap(right){
@@ -36,6 +40,8 @@ FragTrap::FragTrap(const FragTrap& right): ClapTrap(right){
 	this->hp = right.hp;
 	this->damage = right.damage;
 	this->energy = right.energy;
+	this->maxHP = right.maxHP;
+	this->maxEnergy = right.maxEnergy;
 }
 
 FragTrap& FragTrap::operator=(const FragTrap& right){
@@ -44,8 +50,24 @@ FragTrap& FragTrap::operator=(const FragTrap& right){
 	this->hp = right.hp;
 	this->damage = right.damage;
 	this->energy = right.energy;
+	this->maxHP = right.maxHP;
+	this->maxEnergy = right.maxEnergy;
 	}
 	return (*this);
+}
+
+void	FragTrap::attack(const std::string& target){
+	if (this->hp <= 0){
+	std::cout << "FragTrap " << this->name << " is dead." << std::endl;
+	return ;
+	}
+	else if (this->energy <= 0){
+		std::cout << "FragTrap " << this->name << " has run of energy" << std::endl;
+		return ;
+	}
+	this->energy--;
+	std::cout << "FragTrap " << this->name << " attacks " << target << ", causing " << this->damage << " points of damage!" << std::endl;
+
 }
 
 void	FragTrap::highFivesGuys(void){

@@ -6,7 +6,7 @@
 /*   By: hamalmar <hamalmar@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/13 15:40:40 by hamalmar          #+#    #+#             */
-/*   Updated: 2025/07/31 14:42:41 by hamalmar         ###   ########.fr       */
+/*   Updated: 2025/07/31 19:36:18 by hamalmar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,26 +17,30 @@
 */
 
 int	main(void){
-	ClapTrap garry("Garry");
-	ScavTrap bob("Bob");
-	ScavTrap darwin = bob;
+	ClapTrap mansour("Mansour");
+	ScavTrap rashid("Rashid");
 	FragTrap hamad("Hamad");
-	ClapTrap jeff;
 
-	garry.takeDamage(1);
-	bob.beRepaired(10);
-	hamad.attack("Bob");
-	hamad.attack("Bob");
-	bob.takeDamage(2);
-	bob.guardGate();
-	darwin.setName("Darwin");
-	darwin.takeDamage(101);
-	while (hamad.getEnergy() > 0){
-		hamad.attack("Hamad's Shadow");
+	std::cout << "====== ClapTrap Test Started! ======" << std::endl;
+	mansour.takeDamage(1232123);
+	mansour.beRepaired(123);
+	mansour.attack("Rashid");
+	std::cout << "====== ClapTrap Test Completed! ======" << std::endl;
+	std::cout<< std::endl;
+	std::cout << "ScavTrap Test Started" << std::endl;
+	rashid.beRepaired(12345432);
+	for (int i = 0; i < 11; i++){
+		rashid.takeDamage(1);
 	}
-	hamad.attack("Hamad's Shadow");
-	hamad.beRepaired(10);
-	hamad.attack("Hamad's Shadow");
-	jeff.attack("Darwin"); // To check if the ClapTrap will display a name or not.
+	rashid.guardGate();
+	std::cout << "====== ScavTrap Test Completed! ======" << std::endl;
+	std::cout<< std::endl;
+	std::cout << "FragTrap Test Started" << std::endl;
+	hamad.attack("Mansour");
+	hamad.attack("Rashid");
+	hamad.takeDamage(10);
+	hamad.beRepaired(2);
+	hamad.highFivesGuys();
+	std::cout << "====== FragTrap Test Completed! ======" << std::endl;
 	return (0);
 }
