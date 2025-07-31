@@ -6,21 +6,20 @@
 /*   By: hamalmar <hamalmar@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/13 15:40:40 by hamalmar          #+#    #+#             */
-/*   Updated: 2025/07/31 14:32:16 by hamalmar         ###   ########.fr       */
+/*   Updated: 2025/07/31 19:52:51 by hamalmar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ClapTrap.hpp"
 
 int	main(void){
-	ClapTrap clarp;
-	ClapTrap trap("Mario");
-	clarp.attack("Luigi");
-	trap.takeDamage(1111);
-	trap.takeDamage(1);
-	trap.attack("Meowzer");
-	clarp.beRepaired(1111111111);
-	clarp.takeDamage(1111111121);
-	clarp.beRepaired(10);
+	ClapTrap mansour("Mansour");
+
+	std::cout << "====== ClapTrap Test Started! ======" << std::endl;
+	mansour.takeDamage(1232123);
+	mansour.beRepaired(123);
+	mansour.attack("Rashid");
+	std::cout << "====== ClapTrap Test Completed! ======" << std::endl;
+	std::cout<< std::endl;;
 	return (0);
 }

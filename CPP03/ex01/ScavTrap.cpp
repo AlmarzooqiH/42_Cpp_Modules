@@ -6,7 +6,7 @@
 /*   By: hamalmar <hamalmar@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/13 15:57:19 by hamalmar          #+#    #+#             */
-/*   Updated: 2025/07/31 19:46:33 by hamalmar         ###   ########.fr       */
+/*   Updated: 2025/07/31 19:57:13 by hamalmar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ ScavTrap::ScavTrap(): ClapTrap(){
 
 ScavTrap::ScavTrap(const ScavTrap& right): ClapTrap(right){
 	std::cout << "ScavTrap copy constructor" << std::endl;
-	this->name = "ScavTrap";
 	this->hp = right.hp;
 	this->damage = right.damage;
 	this->energy = right.energy;

@@ -6,7 +6,7 @@
 /*   By: hamalmar <hamalmar@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/13 15:40:40 by hamalmar          #+#    #+#             */
-/*   Updated: 2025/07/31 19:36:18 by hamalmar         ###   ########.fr       */
+/*   Updated: 2025/07/31 19:51:58 by hamalmar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	main(void){
 	std::cout<< std::endl;
 	std::cout << "ScavTrap Test Started" << std::endl;
 	rashid.beRepaired(12345432);
-	for (int i = 0; i < 11; i++){
+	for (int i = 0; i < 12; i++){
 		rashid.takeDamage(1);
 	}
 	rashid.guardGate();
