@@ -6,7 +6,7 @@
 /*   By: hamalmar <hamalmar@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/13 12:42:50 by hamalmar          #+#    #+#             */
-/*   Updated: 2025/07/14 17:06:10 by hamalmar         ###   ########.fr       */
+/*   Updated: 2025/07/31 15:29:48 by hamalmar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 ClapTrap::ClapTrap(){
 	std::cout << "ClapTrap defualt constructor" << std::endl;
+	this->name = "ClapTrap";
 	this->hp = 10;
 	this->energy = 10;
 	this->damage = 0;

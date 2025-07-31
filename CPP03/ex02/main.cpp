@@ -6,7 +6,7 @@
 /*   By: hamalmar <hamalmar@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/13 15:40:40 by hamalmar          #+#    #+#             */
-/*   Updated: 2025/07/14 17:09:17 by hamalmar         ###   ########.fr       */
+/*   Updated: 2025/07/31 14:42:41 by hamalmar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,26 +17,26 @@
 */
 
 int	main(void){
-	ClapTrap robinson("Gaylord Robinson");
-	ScavTrap gumball("Gumball Watterson");
-	ScavTrap darwin = gumball;
-	FragTrap richard("Richard Watterson");
-	ClapTrap anais;
+	ClapTrap garry("Garry");
+	ScavTrap bob("Bob");
+	ScavTrap darwin = bob;
+	FragTrap hamad("Hamad");
+	ClapTrap jeff;
 
-	robinson.takeDamage(1);
-	gumball.beRepaired(10);
-	richard.attack("Gumball");
-	richard.attack("Darwin");
-	gumball.takeDamage(2);
-	gumball.guardGate();
-	darwin.setName("Darwin Watterson");
+	garry.takeDamage(1);
+	bob.beRepaired(10);
+	hamad.attack("Bob");
+	hamad.attack("Bob");
+	bob.takeDamage(2);
+	bob.guardGate();
+	darwin.setName("Darwin");
 	darwin.takeDamage(101);
-	while (richard.getEnergy() > 0){
-		richard.attack("Richard's Shadow");
+	while (hamad.getEnergy() > 0){
+		hamad.attack("Hamad's Shadow");
 	}
-	richard.attack("Richard's Shadow");
-	richard.beRepaired(10);
-	richard.attack("Richard's Shadow");
-	anais.attack("Darwin"); // To check if the ClapTrap will display a name or not.
+	hamad.attack("Hamad's Shadow");
+	hamad.beRepaired(10);
+	hamad.attack("Hamad's Shadow");
+	jeff.attack("Darwin"); // To check if the ClapTrap will display a name or not.
 	return (0);
 }

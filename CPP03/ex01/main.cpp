@@ -6,7 +6,7 @@
 /*   By: hamalmar <hamalmar@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/13 15:40:40 by hamalmar          #+#    #+#             */
-/*   Updated: 2025/07/14 00:23:03 by hamalmar         ###   ########.fr       */
+/*   Updated: 2025/07/31 14:32:59 by hamalmar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,14 @@
 */
 
 int	main(void){
-	ClapTrap robinson("Gaylord Robinson");
-	ScavTrap gumball("Gumball Watterson");
-	ScavTrap darwin = gumball;
-	robinson.takeDamage(1);
-	gumball.beRepaired(10);
-	gumball.takeDamage(2);
-	gumball.guardGate();
-	darwin.setName("Darwin Watterson");
+	ClapTrap garry("Garry");
+	ScavTrap bob("Bob");
+	ScavTrap darwin = bob;
+	garry.takeDamage(1);
+	bob.beRepaired(10);
+	bob.takeDamage(2);
+	bob.guardGate();
+	darwin.setName("Darwin");
 	darwin.takeDamage(101);
 	return (0);
 }

@@ -14,6 +14,7 @@
 
 FragTrap::FragTrap(): ClapTrap(){
 	std::cout << "FragTrap defualt constructor" << std::endl;
+	this->name = "FragTrap";
 	this->hp = 100;
 	this->energy = 100;
 	this->damage = 30;
@@ -48,9 +49,5 @@ FragTrap& FragTrap::operator=(const FragTrap& right){
 }
 
 void	FragTrap::highFivesGuys(void){
-	if (!this->name.empty()){
-		std::cout << "FragTrap " << this->name << " requesting a highfive! ✋✋✋✋" << std::endl;
-		return ;
-	}
 	std::cout << "FragTrap requesting a highfive! ✋✋✋✋" << std::endl;
 }

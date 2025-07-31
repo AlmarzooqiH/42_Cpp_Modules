@@ -6,7 +6,7 @@
 /*   By: hamalmar <hamalmar@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/13 15:57:19 by hamalmar          #+#    #+#             */
-/*   Updated: 2025/07/14 00:21:39 by hamalmar         ###   ########.fr       */
+/*   Updated: 2025/07/31 15:29:13 by hamalmar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 ScavTrap::ScavTrap(): ClapTrap(){
 	std::cout << "ScavTrap default constructor" << std::endl;
+	this->name = "ScavTrap";
 	this->hp = 100;
 	this->energy = 50;
 	this->damage = 20;
@@ -22,6 +23,7 @@ ScavTrap::ScavTrap(): ClapTrap(){
 
 ScavTrap::ScavTrap(const ScavTrap& right): ClapTrap(right){
 	std::cout << "ScavTrap copy constructor" << std::endl;
+	this->name = "ScavTrap";
 	this->hp = right.hp;
 	this->damage = right.damage;
 	this->energy = right.energy;
@@ -50,9 +52,5 @@ ScavTrap& ScavTrap::operator=(const ScavTrap& right){
 }
 
 void	ScavTrap::guardGate(){
-	if (this->name.empty()){
-		std::cout << "ScavTrap is now in Gate keeper mode." << std::endl;
-		return ;
-	}
 	std::cout << "ScavTrap " << this->name << " is now in Gate keeper mode." << std::endl;
 }

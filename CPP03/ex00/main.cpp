@@ -6,7 +6,7 @@
 /*   By: hamalmar <hamalmar@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/13 15:40:40 by hamalmar          #+#    #+#             */
-/*   Updated: 2025/07/14 00:16:48 by hamalmar         ###   ########.fr       */
+/*   Updated: 2025/07/31 14:32:16 by hamalmar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 int	main(void){
 	ClapTrap clarp;
-	ClapTrap trap("Gaylord Robinson");
-	clarp.attack("Bob");
+	ClapTrap trap("Mario");
+	clarp.attack("Luigi");
 	trap.takeDamage(1111);
 	trap.takeDamage(1);
 	trap.attack("Meowzer");
