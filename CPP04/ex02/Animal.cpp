@@ -13,6 +13,7 @@
 #include "Animal.hpp"
 
 Animal::Animal(){
+	this->type = "Animal";
 	std::cout << "Animal defualt constructor" << std::endl;
 }
 

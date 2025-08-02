@@ -6,7 +6,7 @@
 /*   By: hamalmar <hamalmar@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/15 11:12:24 by hamalmar          #+#    #+#             */
-/*   Updated: 2025/07/15 14:38:53 by hamalmar         ###   ########.fr       */
+/*   Updated: 2025/08/02 15:01:58 by hamalmar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ Brain::Brain(const Brain& right){
 }
 
 Brain& Brain::operator=(const Brain& right){
+	std::cout << "Brain copy assignment constructor" << std::endl;
 	if (this != &right){
 		for (int i = 0; i < 100; i++){
 			this->ideas[i] = right.ideas[i];

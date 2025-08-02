@@ -6,54 +6,78 @@
 /*   By: hamalmar <hamalmar@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/14 17:18:27 by hamalmar          #+#    #+#             */
-/*   Updated: 2025/07/14 17:18:27 by hamalmar         ###   ########.fr       */
+/*   Updated: 2025/08/02 15:50:00 by hamalmar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Cat.hpp"
 #include "Dog.hpp"
 #include "WrongCat.hpp"
+#include <cstdlib>
+#include <ctime>
+#include <iostream>
 
 int main(void){
+	std::string catIdeas[] = {"PET ME SERVANT", "Give me a treat or the tv will go sky diving", "World Domination!", "I will bite you!", "I shall poop everywhere :3"};
+	std::string dogIdeas[] = {"Wow i love that guy :D", "What a legend", "We Are BFF", "Lets go for a Walk", "Woof Woof!!!!!"};
+	const int catIdeasSize = 5;
+	const int dogIdeasSize = 5;
+	const int size = 4;
+	Animal *zoo[size];
+
 	std::cout << "Animal Selfawareness Test Started!" << std::endl << std::endl;
-	const Cat* leo = new Cat();
-	const Dog *bobby = new Dog();
-	Brain& leo_brain = leo->getBrain();
-	Brain& bobby_brain = bobby->getBrain();
-	leo_brain.setIdea(0, "World Domination :3");
-	leo_brain.setIdea(1, "Pet me Human");
-	leo_brain.setIdea(2, "Give me treats");
-	leo_brain.setIdea(3, "I will poop on the sofa");
-	bobby_brain.setIdea(0, "Wow i love that guy!");
-	bobby_brain.setIdea(1, "This human is my best freind");
-	bobby_brain.setIdea(2, "Can i please have a treat?!");
-	bobby_brain.setIdea(3, "Woof Woof :P");
 
-	const Dog* larry = new Dog(*bobby);
-	Brain& larry_brain = larry->getBrain();
+	for (int i = 0; i < size; i++){
+		if (i < (size / 2)){
+			zoo[i] = new Cat("Larry El Gato");
+		} else {
+			zoo[i] = new Dog("Bobby");
+		}
+	}
 
-	std::cout << std::endl << "Animal Ideas Before Changing" << std::endl;
-	std::cout << "Bobby's idea at index 0: " << bobby_brain.getIdea(0) << std::endl;
-	std::cout << "Larry's idea at index 0: " << larry_brain.getIdea(0) << std::endl << std::endl;
-	std::cout << "Animal Ideas After Changing" << std::endl;
-	larry_brain.setIdea(0, "I hate that guy!");
-	std::cout << "Bobby's idea at index 0: " << bobby_brain.getIdea(0) << std::endl;
-	std::cout << "Larry's idea at index 0: " << larry_brain.getIdea(0) << std::endl << std::endl;
+	for (int i = 0; i < size; i++){
+		std::srand(std::time(NULL) + i + (size / 2));
+		if (i < (size / 2)){
+			Cat *larry = (Cat *)zoo[i];
+			Brain &larryBrain = larry->getBrain();
+			for (int k = 0; k < catIdeasSize; k++){
+				int randIndex = std::rand() % catIdeasSize;
+				larryBrain.setIdea(k, catIdeas[randIndex]);
+			}
+		} else {
+			Dog *bobby = (Dog *)zoo[i];
+			Brain &bobbyBrain = bobby->getBrain();
+			for (int k = 0; k < dogIdeasSize; k++){
+				int randIndex = std::rand() % dogIdeasSize;
+				bobbyBrain.setIdea(k, dogIdeas[randIndex]);
+			}
+		}
+	}
 
-	const Cat* dosa = new Cat(*leo);
-	Brain& dosa_brain = dosa->getBrain();
+	std::cout << std::endl << "Animals Thoughts" << std::endl;
+	for (int i = 0; i < size; i++){
+		if (i < (size / 2)){
+			std::cout << "Cat[" << i << "] is Thinking of: " << std::endl;
+			Cat *larry = (Cat *)zoo[i];
+			Brain &larryBrain = larry->getBrain();
+			for (int k = 0; k < catIdeasSize; k++){
+				std::cout << "Idea[" << k << "]: " << larryBrain.getIdea(k) << std::endl;
+			}
+			std::cout << std::endl;
+		} else {
+			std::cout << "Dog[" << i << "] is Thinking of: " << std::endl;
+			Dog *bobby = (Dog *)zoo[i];
+			Brain &bobbyBrain = bobby->getBrain();
+			for (int k = 0; k < dogIdeasSize; k++){
+				std::cout << "Idea[" << k << "]: " << bobbyBrain.getIdea(k) << std::endl;
+			}
+			std::cout << std::endl;
+		}
+	}
 
-	std::cout << "Animal Ideas Before Changing" << std::endl;
-	std::cout << "Leo's idea at index 0: " << leo_brain.getIdea(0) << std::endl;
-	std::cout << "Dosa's idea at index 0: " << dosa_brain.getIdea(0) << std::endl << std::endl;
-	std::cout << "Animal Ideas After Changing" << std::endl;
-	dosa_brain.setIdea(0, "I kinda hate that guy!");
-	std::cout << "Leo's idea at index 0: " << leo_brain.getIdea(0) << std::endl;
-	std::cout << "Dosa's idea at index 0: " << dosa_brain.getIdea(0) << std::endl << std::endl;
-	std::cout << "Animal Selfawareness Test Finished!" << std::endl << std::endl;
-	delete leo;
-	delete bobby;
-	delete larry;
-	delete dosa;
+	std::cout << "The Death Of Larries And Bobbies" << std::endl << std::endl;
+	for (int i = 0; i < size; i++){
+		delete zoo[i];
+	}
 	return (0);
 }

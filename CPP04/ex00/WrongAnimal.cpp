@@ -6,13 +6,14 @@
 /*   By: hamalmar <hamalmar@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/15 10:36:42 by hamalmar          #+#    #+#             */
-/*   Updated: 2025/07/15 10:54:21 by hamalmar         ###   ########.fr       */
+/*   Updated: 2025/08/02 14:53:55 by hamalmar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "WrongAnimal.hpp"
 
 WrongAnimal::WrongAnimal(){
+	this->type = "WrongAnimal";
 	std::cout << "WrongAnimal defualt constructor" << std::endl;
 }
 
