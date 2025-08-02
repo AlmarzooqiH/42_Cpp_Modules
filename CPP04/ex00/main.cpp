@@ -19,8 +19,8 @@ int main(void){
 	const WrongAnimal* wrong_meta = new WrongAnimal();
 	const WrongAnimal* wrong_cat = new WrongCat();
 
-	std::cout << wrong_meta->getType() << std::endl;
-	std::cout << wrong_cat->getType() << std::endl;
+	std::cout << std::endl << "Animal Type: " << wrong_meta->getType() << std::endl;
+	std::cout << "Animal Type: " << wrong_cat->getType() << std::endl;
 	wrong_cat->makeSound();
 	wrong_meta->makeSound();
 
@@ -31,8 +31,8 @@ int main(void){
 	const Animal* meta = new Animal();
 	const Animal* cat = new Cat();
 	const Animal* dog = new Dog();
-	std::cout << dog->getType() << " " << std::endl;
-	std::cout << cat->getType() << " " << std::endl;
+	std::cout << std::endl << "Animal Type: " << dog->getType() << " " << std::endl;
+	std::cout << "Animal Type: " << cat->getType() << " " << std::endl;
 	cat->makeSound();
 	dog->makeSound();
 	meta->makeSound();

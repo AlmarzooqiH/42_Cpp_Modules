@@ -13,23 +13,24 @@
 #include "Dog.hpp"
 
 Dog::Dog(): Animal("Dog"){
-	std::cout << "Dog defualt constructor" << std::endl;
+	std::cout << "Dog Defualt Constructor" << std::endl;
 }
 
 Dog::Dog(const std::string animalType): Animal(animalType){
-	std::cout << "Cat type constructor" << std::endl;
+	std::cout << "Cat Type Constructor" << std::endl;
 }
 
 Dog::~Dog(){
-	std::cout << "Dog deconstructor" << std::endl;
+	std::cout << "Dog Deconstructor" << std::endl;
 }
 
 Dog::Dog(const Dog& right): Animal(right){
-	std::cout << "Dog copy constructor" << std::endl;
+	std::cout << "Dog Copy Donstructor" << std::endl;
 	this->type = right.type;
 }
 
 Dog& Dog::operator=(const Dog& right){
+	std::cout << "Dog Copy Assignment Constructor" << std::endl;
 	if (this != &right){
 		this->type = right.type;
 	}
@@ -37,5 +38,5 @@ Dog& Dog::operator=(const Dog& right){
 }
 
 void	Dog::makeSound() const{
-	std::cout << "Woof Woof" << std::endl;
+	std::cout << this->type << ": Woof Woof" << std::endl;
 }

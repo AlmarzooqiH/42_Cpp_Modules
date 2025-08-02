@@ -11,27 +11,27 @@
 /* ************************************************************************** */
 
 #include "Animal.hpp"
-
 Animal::Animal(){
 	this->type = "Animal";
-	std::cout << "Animal defualt constructor" << std::endl;
+	std::cout << "Animal Defualt Constructor" << std::endl;
 }
 
 Animal::~Animal(){
-	std::cout << "Animal deconstructor" << std::endl;
+	std::cout << "Animal Deconstructor" << std::endl;
 }
 
 Animal::Animal(const std::string animalType){
+	std::cout << "Animal Type Constructor" << std::endl;
 	this->type = animalType;
 }
 
 Animal::Animal(const Animal& right){
-	std::cout << "Animal copy constructor" << std::endl;
+	std::cout << "Animal Copy Constructor" << std::endl;
 	this->type = right.type;
 }
 
 Animal&	Animal::operator=(const Animal& right){
-
+	std::cout << "Animal Copy Assignment Constructor" << std::endl;
 	if (this != &right){
 		this->type = right.type;
 	}
@@ -39,7 +39,7 @@ Animal&	Animal::operator=(const Animal& right){
 }
 
 void	Animal::makeSound() const{
-	std::cout << "Animal Noises!!!" << std::endl;
+	std::cout << this->type << ": Animal Noises!!!" << std::endl;
 }
 
 std::string	Animal::getType() const{

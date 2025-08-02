@@ -6,30 +6,31 @@
 /*   By: hamalmar <hamalmar@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/15 10:41:27 by hamalmar          #+#    #+#             */
-/*   Updated: 2025/07/15 10:54:42 by hamalmar         ###   ########.fr       */
+/*   Updated: 2025/08/02 18:29:39 by hamalmar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "WrongCat.hpp"
 
 WrongCat::WrongCat(): WrongAnimal("WrongCat"){
-	std::cout << "WrongCat defualt constructor" << std::endl;
+	std::cout << "WrongCat Defualt Constructor" << std::endl;
 }
 
 WrongCat::WrongCat(const std::string animalType): WrongAnimal(animalType){
-	std::cout << "WrongCat type constructor" << std::endl;
+	std::cout << "WrongCat Type Constructor" << std::endl;
 }
 
 WrongCat::~WrongCat(){
-    std::cout << "WrongCat deconstructor" << std::endl;
+    std::cout << "WrongCat Deconstructor" << std::endl;
 }
 
 WrongCat::WrongCat(const WrongCat& right): WrongAnimal(right){
-	std::cout << "WrongCat copy constructor" << std::endl;
+	std::cout << "WrongCat Copy Constructor" << std::endl;
 	this->type = right.type;
 }
 
 WrongCat& WrongCat::operator=(const WrongCat& right){
+	std::cout << "WongCat Copy Assignment Constructor" << std::endl;
 	if (this != &right){
 		this->type = right.type;
 	}

@@ -75,9 +75,23 @@ int main(void){
 		}
 	}
 
-	std::cout << "The Death Of Larries And Bobbies" << std::endl << std::endl;
+	Cat	*leo = new Cat(*(Cat *)zoo[0]);
+	std::cout << std::endl << "Copied Cat: " << (Cat *)zoo[0] << std::endl; 
+	std::cout << "Leo: "<< leo << std::endl << std::endl << "Leo's Thoughts:" << std::endl;
+	Brain &leoBrain = leo->getBrain();
+	for (int i = 0; i < catIdeasSize; i++){
+		std::cout << "Idea[" << i << "]: " << leoBrain.getIdea(i) << std::endl;
+	}
+	std::cout << std::endl << "Leo has Died" << std::endl;
+	delete leo;
+	std::cout << std::endl << "The Death Of Larries And Bobbies" << std::endl << std::endl;
 	for (int i = 0; i < size; i++){
+		if (i < (size / 2))
+			std::cout << "Cat[" << i << "]: Has Died" << std::endl;
+		else
+			std::cout << "Dog[" << i << "]: Has Died" << std::endl;
 		delete zoo[i];
+		std::cout << std::endl;
 	}
 	return (0);
 }

@@ -1,4 +1,4 @@
-PROGRAM_NAME = GettingConscious
+PROGRAM_NAME = GettingConsciousness
 COMPILER = c++
 CPP_VERSION = c++98
 FLAGS = -std=$(CPP_VERSION) -Wall -Wextra -Werror 
