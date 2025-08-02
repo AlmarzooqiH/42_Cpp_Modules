@@ -6,7 +6,7 @@
 /*   By: hamalmar <hamalmar@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/13 15:40:40 by hamalmar          #+#    #+#             */
-/*   Updated: 2025/07/31 19:51:58 by hamalmar         ###   ########.fr       */
+/*   Updated: 2025/08/02 14:09:55 by hamalmar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,7 @@ int	main(void){
 	}
 	rashid.guardGate();
 	std::cout << "====== ScavTrap Test Completed! ======" << std::endl;
-	std::cout<< std::endl;
-	std::cout << "FragTrap Test Started" << std::endl;
+	std::cout << std::endl << "====== FragTrap Test Started ======" << std::endl;
 	hamad.attack("Mansour");
 	hamad.attack("Rashid");
 	hamad.takeDamage(10);

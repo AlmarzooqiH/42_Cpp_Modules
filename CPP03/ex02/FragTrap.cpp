@@ -13,7 +13,7 @@
 #include "FragTrap.hpp"
 
 FragTrap::FragTrap(): ClapTrap(){
-	std::cout << "FragTrap defualt constructor" << std::endl;
+	std::cout << "FragTrap Defualt Constructor" << std::endl;
 	this->name = "FragTrap";
 	this->hp = 100;
 	this->energy = 100;
@@ -23,11 +23,11 @@ FragTrap::FragTrap(): ClapTrap(){
 }
 
 FragTrap::~FragTrap(){
-	std::cout << "FragTrap deconstructor" << std::endl;
+	std::cout << "FragTrap Deconstructor" << std::endl;
 }
 
 FragTrap::FragTrap(std::string name): ClapTrap(name) {
-	std::cout << "FragTrap name constructor" << std::endl;
+	std::cout << "FragTrap Name Constructor" << std::endl;
 	this->hp = 100;
 	this->energy = 100;
 	this->damage = 30;
@@ -36,7 +36,7 @@ FragTrap::FragTrap(std::string name): ClapTrap(name) {
 }
 
 FragTrap::FragTrap(const FragTrap& right): ClapTrap(right){
-	std::cout << "FragTrap copy constructor" << std::endl;
+	std::cout << "FragTrap Copy Constructor" << std::endl;
 	this->hp = right.hp;
 	this->damage = right.damage;
 	this->energy = right.energy;
@@ -45,7 +45,7 @@ FragTrap::FragTrap(const FragTrap& right): ClapTrap(right){
 }
 
 FragTrap& FragTrap::operator=(const FragTrap& right){
-	std::cout << "FragTrap operator = constructor" << std::endl;
+	std::cout << "FragTrap Copy Assignment Constructor" << std::endl;
 	if (this != &right){
 	this->hp = right.hp;
 	this->damage = right.damage;
@@ -71,5 +71,13 @@ void	FragTrap::attack(const std::string& target){
 }
 
 void	FragTrap::highFivesGuys(void){
+	if (this->hp <= 0){
+		std::cout << "FragTrap " << this->name << " is dead" << std::endl;
+		return ;
+	}
+	else if (this->energy <= 0){
+		std::cout << "FragTrap " << this->name << " has run of energy" << std::endl;
+		return ;
+	}
 	std::cout << "FragTrap requesting a highfive! ✋✋✋✋" << std::endl;
 }

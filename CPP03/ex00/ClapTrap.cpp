@@ -6,13 +6,14 @@
 /*   By: hamalmar <hamalmar@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/13 12:42:50 by hamalmar          #+#    #+#             */
-/*   Updated: 2025/07/31 19:44:23 by hamalmar         ###   ########.fr       */
+/*   Updated: 2025/08/02 13:59:33 by hamalmar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ClapTrap.hpp"
 
 ClapTrap::ClapTrap(){
+	std::cout << "ClapTrap Default Constructor" << std::endl;
 	this->name = "ClapTrap";
 	this->hp = 10;
 	this->energy = 10;
@@ -21,11 +22,11 @@ ClapTrap::ClapTrap(){
 	this->maxEnergy = 10;
 }
 ClapTrap::~ClapTrap(){
-	std::cout << "ClapTrap destructor" << std::endl;
+	std::cout << "ClapTrap Destructor" << std::endl;
 }
 
 ClapTrap::ClapTrap(const std::string name){
-	std::cout << "ClapTrap name consturctor" << std::endl;
+	std::cout << "ClapTrap Name Consturctor" << std::endl;
 	this->name = name;
 	this->hp = 10;
 	this->energy = 10;
@@ -35,6 +36,7 @@ ClapTrap::ClapTrap(const std::string name){
 }
 
 ClapTrap::ClapTrap(const ClapTrap& right){
+	std::cout << "ClapTrap Copy Constructor" << std::endl;
 	this->name = right.name;
 	this->hp = right.hp;
 	this->damage = right.damage;
@@ -44,6 +46,7 @@ ClapTrap::ClapTrap(const ClapTrap& right){
 }
 
 ClapTrap& ClapTrap::operator=(const ClapTrap& right){
+	std::cout << "ClapTrap Copy Assignment Constructor" << std::endl;
 	if (this != &right){
 	this->name = right.name;
 	this->hp = right.hp;
