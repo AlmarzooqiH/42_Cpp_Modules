@@ -6,7 +6,7 @@
 /*   By: hamalmar <hamalmar@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/13 12:42:50 by hamalmar          #+#    #+#             */
-/*   Updated: 2025/08/02 14:01:24 by hamalmar         ###   ########.fr       */
+/*   Updated: 2025/08/05 11:05:48 by hamalmar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ void	ClapTrap::beRepaired(unsigned int amount){
 		std::cout << "ClapTrap " << this->name << " has run of energy" << std::endl;
 		return ;
 	}
-	this->hp = ((this->hp + amount) > this->maxHP) ? 10 : this->hp + amount;
+	this->hp = ((this->hp + amount) > this->maxHP) ? this->maxHP : this->hp + amount;
 	this->energy--;
 	std::cout << "ClapTrap " << this->name << " has reparied " << amount << " of HP" << std::endl;
 }
