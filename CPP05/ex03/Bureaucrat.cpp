@@ -24,9 +24,8 @@ Bureaucrat::Bureaucrat(const std::string name, int grade)
 Bureaucrat::~Bureaucrat(){}
 
 Bureaucrat::Bureaucrat(const Bureaucrat& right)
- : name(right.name)
+ : name(right.name), grade(right.grade)
 {
-	this->grade = right.grade;
 }
 
 Bureaucrat& Bureaucrat::operator=(const Bureaucrat& right){

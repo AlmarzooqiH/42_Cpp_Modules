@@ -30,29 +30,30 @@ int main(void){
     AForm *shrubbery = new ShrubberyCreationForm("Collect Tax");
     AForm *bender    = new RobotomyRequestForm("Transform Into A Bender");
     AForm *taxEvader  = slave.makeForm("p", "Tax Evader");
-
-    try{
-        hamad.executeForm(*shrubbery);
-    } catch (std::exception &err){
-        std::cout << err.what() << std::endl;
-    }
+    
+    std::cout << std::endl;
+    hamad.executeForm(*shrubbery);
+    std::cout << std::endl;
 
     larry.signForm(*shrubbery);
-    try{
-        larry.executeForm(*shrubbery);
-    } catch (std::exception &err){
-        std::cout << err.what() << std::endl;
-    }
+    larry.executeForm(*shrubbery);
+    std::cout << std::endl;
 
     ahmed.executeForm(*shrubbery);
-
     ahmed.signForm(*bender);
     ahmed.executeForm(*bender);
+    std::cout << std::endl;
+
     hamad.executeForm(*bender);
+    std::cout << std::endl;
 
     larry.signForm(*taxEvader);
+    std::cout << std::endl;
+
     ahmed.signForm(*taxEvader);
     ahmed.executeForm(*taxEvader);
+    std::cout << std::endl;
+
     hamad.signForm(*taxEvader);
     hamad.executeForm(*taxEvader);
 

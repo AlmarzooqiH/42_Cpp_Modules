@@ -20,12 +20,17 @@ int main() {
     Form    roi;
     Form    renewID("ID Renewal", 150, 1);
 
+    std::cout << std::endl;
+
     hamad.signForm(roi);
+    std::cout << std::endl;
+
     larry.signForm(renewID);
+    std::cout << std::endl;
 
     if (!renewID.getIsSigned())
         hamad.signForm(renewID);
-
+    std::cout << std::endl;
     hamad.signForm(roi);
     return 0;
 }

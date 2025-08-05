@@ -59,7 +59,9 @@ int			AForm::getReqGrade(void) const {return (this->reqGrade);}
 int			AForm::getReqGradeToExec(void) const {return (this->reqGradeToExec);}
 
 std::ostream& operator<<(std::ostream& os, const AForm& f){
-	os << "Form name: " << f.getName() << " , isSigned: " << f.getIsSigned() << " , reqGrade: " << f.getReqGrade() << " , ReqGradeToExec: " << f.getReqGradeToExec();
+	os << "Form name: " << f.getName() << " , isSigned: " <<
+	f.getIsSigned() << " , reqGrade: " << f.getReqGrade() <<
+	" , ReqGradeToExec: " << f.getReqGradeToExec();
 	return (os);
 }
 

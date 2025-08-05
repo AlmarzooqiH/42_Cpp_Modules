@@ -27,21 +27,28 @@ int main(void){
     AForm *bender    = new RobotomyRequestForm("Transform Into A Bender");
     AForm *evadeTax  = new PresidentialPardonForm("Tax Evader");
 
+    std::cout << std::endl;
     hamad.executeForm(*shrubbery);
+    std::cout << std::endl;
 
     larry.signForm(*shrubbery);
     larry.executeForm(*shrubbery);
+    std::cout << std::endl;
 
     ahmed.executeForm(*shrubbery);
     ahmed.signForm(*bender);
     ahmed.executeForm(*bender);
+    std::cout << std::endl;
 
     hamad.executeForm(*bender);
+    std::cout << std::endl;
 
     larry.signForm(*evadeTax);
+    std::cout << std::endl;
 
     ahmed.signForm(*evadeTax);
     ahmed.executeForm(*evadeTax);
+    std::cout << std::endl;
 
     hamad.signForm(*evadeTax);
     hamad.executeForm(*evadeTax);

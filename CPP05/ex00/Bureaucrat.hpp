@@ -21,16 +21,6 @@ class Bureaucrat{
         int                 grade;
     
     public:
-        
-        class GradeTooHighException: public std::exception{
-            public:
-                const char *what() const throw();   
-        };
-        class GradeTooLowException: public std::exception{
-            public:
-                const char *what() const throw();
-        };
-    
         Bureaucrat();
         Bureaucrat(const std::string name, int grade);
         ~Bureaucrat();
@@ -44,6 +34,16 @@ class Bureaucrat{
         
         friend std::ostream& operator<<(std::ostream& os, const Bureaucrat& b);
 
+        class GradeTooHighException: public std::exception{
+            public:
+                const char *what() const throw();   
+        };
+
+        class GradeTooLowException: public std::exception{
+            public:
+                const char *what() const throw();
+        };
+    
 };
 
 #endif
