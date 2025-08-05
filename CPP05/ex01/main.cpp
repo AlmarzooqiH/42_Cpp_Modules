@@ -14,31 +14,18 @@
 #include "Form.hpp"
 
 
-int main(void){
-	Bureaucrat hamad;
-	Bureaucrat larry("Larry", 5);
-	Form roi;
-	Form renewID("ID Renewal", 150, 1);
+int main() {
+    Bureaucrat hamad;
+    Bureaucrat larry("Larry", 5);
+    Form    roi;
+    Form    renewID("ID Renewal", 150, 1);
 
-	try {
-		hamad.signForm(roi);
-	} catch (std::exception& err){
-		std::cout << err.what() << std::endl;
-	}
-	try {
-		larry.signForm(renewID);
-	} catch (std::exception& err){
-		std::cout << err.what() << std::endl;
-	}
+    hamad.signForm(roi);
+    larry.signForm(renewID);
 
-	if (!renewID.getIsSigned()){
-		try {
-			hamad.signForm(renewID);
-		} catch (std::exception& err){
-			std::cout << err.what() << std::endl;
-		}
-	}
+    if (!renewID.getIsSigned())
+        hamad.signForm(renewID);
 
-	return (0);
+    hamad.signForm(roi);
+    return 0;
 }
-

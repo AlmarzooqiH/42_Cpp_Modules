@@ -48,6 +48,11 @@ class Form{
             public:
                 const char *what() const throw();
         };
+        
+        class FormAlreadyBeenSignedException: public std::exception{
+            public:
+                const char *what() const throw();
+        };
 };
 
 #endif

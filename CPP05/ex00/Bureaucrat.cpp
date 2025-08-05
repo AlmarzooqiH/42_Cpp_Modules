@@ -18,14 +18,18 @@ Bureaucrat::Bureaucrat()
 
 Bureaucrat::Bureaucrat(const std::string name, int grade)
 	: name(name), grade(grade)
-{}
+{
+	if (grade < 1)
+		throw Bureaucrat::GradeTooHighException();
+	else if (grade > 150)
+		throw Bureaucrat::GradeTooLowException();
+}
 
 Bureaucrat::~Bureaucrat(){}
 
 Bureaucrat::Bureaucrat(const Bureaucrat& right)
- : name(right.name)
+ : name(right.name), grade(right.grade)
 {
-	this->grade = right.grade;
 }
 
 Bureaucrat& Bureaucrat::operator=(const Bureaucrat& right){

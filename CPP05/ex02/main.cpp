@@ -9,19 +9,6 @@
 /*   Updated: 2025/07/27 19:14:52 by hamalmar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: hamalmar <hamalmar@student.42abudhabi.a    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/27 19:14:52 by hamalmar          #+#    #+#             */
-/*   Updated: 2025/07/30 12:00:00 by hamalmar         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include <cstdlib>
 #include <ctime>
 #include "Bureaucrat.hpp"
@@ -40,28 +27,22 @@ int main(void){
     AForm *bender    = new RobotomyRequestForm("Transform Into A Bender");
     AForm *evadeTax  = new PresidentialPardonForm("Tax Evader");
 
-    try{
-        hamad.executeForm(*shrubbery);
-    } catch (std::exception &err){
-        std::cout << err.what() << std::endl;
-    }
+    hamad.executeForm(*shrubbery);
 
     larry.signForm(*shrubbery);
-    try{
-        larry.executeForm(*shrubbery);
-    } catch (std::exception &err){
-        std::cout << err.what() << std::endl;
-    }
+    larry.executeForm(*shrubbery);
 
     ahmed.executeForm(*shrubbery);
-
     ahmed.signForm(*bender);
     ahmed.executeForm(*bender);
+
     hamad.executeForm(*bender);
 
     larry.signForm(*evadeTax);
+
     ahmed.signForm(*evadeTax);
     ahmed.executeForm(*evadeTax);
+
     hamad.signForm(*evadeTax);
     hamad.executeForm(*evadeTax);
 
