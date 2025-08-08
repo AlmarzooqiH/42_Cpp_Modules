@@ -1,4 +1,4 @@
-PROGRAM_NAME=casters
+PROGRAM_NAME=convert
 
 COMPILER=c++
 STD_VERSION=c++98

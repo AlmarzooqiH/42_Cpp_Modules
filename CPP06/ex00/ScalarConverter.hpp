@@ -6,7 +6,7 @@
 /*   By: hamalmar <hamalmar@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/30 20:42:27 by hamalmar          #+#    #+#             */
-/*   Updated: 2025/08/08 15:52:31 by hamalmar         ###   ########.fr       */
+/*   Updated: 2025/08/09 00:06:15 by hamalmar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,11 +63,6 @@ class ScalarConverter{
 		public:
 			static void	convert(const std::string& unit);
 			
-			class UnitOverFlowException: public std::exception{
-				public:
-					const char *what() const throw();
-			};
-		
 			class EmptyArgumentException: public std::exception{
 				public:
 					const char *what() const throw();

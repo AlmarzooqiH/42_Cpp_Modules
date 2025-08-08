@@ -6,7 +6,7 @@
 /*   By: hamalmar <hamalmar@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/31 16:51:45 by hamalmar          #+#    #+#             */
-/*   Updated: 2025/08/08 16:01:43 by hamalmar         ###   ########.fr       */
+/*   Updated: 2025/08/09 00:06:38 by hamalmar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,18 +54,7 @@ double	getNumber(const std::string& unit){
 			fraction /= 10;
 		}
 	}
-	double result = out_val * sign;
-	if ((result > std::numeric_limits<double>::max()) || (result < -(std::numeric_limits<double>::max())))
-		throw ScalarConverter::UnitOverFlowException();
-	return (result);
-}
-
-bool isOverflow(double n){
-	return (
-		n < std::numeric_limits<int>::min() || n > std::numeric_limits<int>::max() ||
-		n < -std::numeric_limits<float>::max() || n > std::numeric_limits<float>::max() ||
-		n < -std::numeric_limits<double>::max() || n > std::numeric_limits<double>::max()
-	);
+	return (out_val * sign);
 }
 
 /**************** Checking unit type functionality starts here ****************/
@@ -95,6 +84,9 @@ bool checkCharacterOnly(const std::string& unit){
 		return (false);
 	bool lenIsOne = unit.length() == 1;
 	bool isChar = unit[0] >= std::numeric_limits<char>::min() && unit[0] <= std::numeric_limits<char>::max();
+	bool hasDigit = std::isdigit(static_cast<unsigned char>(unit[0]));
+	if (hasDigit)
+		return (false);
 	return (lenIsOne && isChar);
 }
 
@@ -104,12 +96,11 @@ bool checkIsNan(const std::string& unit){
 	size_t i = 0;
 	while (i < unit.length() && std::isspace(static_cast<unsigned char>(unit[i])))
 		i++;
-	return (
-	(i + 3 == unit.length()) &&
-    (unit[i] == 'n') &&
-	(unit[i + 1] == 'a') &&
-	(unit[i + 2] == 'n')
-	);
+	if (i + 3 > unit.length())
+		return (false);
+	if (unit[i] == 'n' && unit[i + 1] == 'a' && unit[i + 2] == 'n')
+		return (true);
+	return (false);
 }
 
 bool checkIsInf(const std::string& unit){
@@ -119,13 +110,12 @@ bool checkIsInf(const std::string& unit){
 	while (i < unit.length() && std::isspace(static_cast<unsigned char>(unit[i])))
 		i++;
 	if (i < unit.length() && (unit[i] == '+' || unit[i] == '-'))
-		i++;	
-	return (
-	(i < unit.length() - 3) &&
-    (unit[i] == 'i') &&
-	(unit[i + 1] == 'n') &&
-	(unit[i + 2] == 'f')
-	);
+		i++;
+	if (i + 3 > unit.length())
+		return (false);
+	if (unit[i] == 'i' && unit[i + 1] == 'n' && unit[i + 2] == 'f')
+		return (true);
+	return (false);
 }
 
 bool checkCharacterOccourence(const std::string& unit, unsigned char c, unsigned int count){
@@ -138,11 +128,9 @@ bool checkCharacterOccourence(const std::string& unit, unsigned char c, unsigned
 	while (i < unit.length()){
 		if (unit[i] == c)
 			occour++;
-		if (occour == count)
-			return (true);
 		i++;
 	}
-	return (false);
+	return (occour == count);
 }
 
 int	getType(const std::string& unit){
@@ -175,6 +163,20 @@ int	getType(const std::string& unit){
 
 /**************** Checking unit type functionality end here ****************/
 
+bool isIntOverflow(double n){
+    return (
+	n < static_cast<double>(std::numeric_limits<int>::min()) ||
+	n > static_cast<double>(std::numeric_limits<int>::max())
+		   );
+}
+
+bool isFloatOverFlow(double n){
+	return (
+		(n < -std::numeric_limits<float>::max()) ||
+		(n > std::numeric_limits<float>::max())
+		   );
+}
+
 char getSign(const std::string& unit){
 	if (unit.empty())
 		return ('H');
@@ -200,7 +202,21 @@ void	ScalarConverter::convert(const std::string& unit){
 		return;
 	}
 
-	if ((unitType & INF) ||((unitType & INF) && (unitType & FLOAT))){
+	if (unitType & INF && !(unitType & FLOAT)){
+		char sign = getSign(unit);
+		std::cout << "Character: Impossible" << std::endl;
+		std::cout << "Integer: Impossible" << std::endl;
+		if (sign == '+' || sign == '-'){
+			std::cout << "Float: " << sign << "Inf" << std::endl;
+			std::cout << "Double: " << sign << "Inf" << std::endl;
+		} else{
+			std::cout << "Float: Inf" << std::endl;
+			std::cout << "Double: Inf" << std::endl;
+		}
+		return ;
+	}
+
+	if ((unitType & INF) && (unitType & FLOAT)){
 		char sign = getSign(unit);
 		std::cout << "Character: Impossible" << std::endl;
 		std::cout << "Integer: Impossible" << std::endl;
@@ -213,44 +229,47 @@ void	ScalarConverter::convert(const std::string& unit){
 		}
 		return ;
 	}
-
 	if (unitType & CHARACTER){
-		double number= getNumber(unit);
-		if ((number < std::numeric_limits<char>::min()) || (number > std::numeric_limits<char>::max())){
+		char c = unit[0];
+		if ((c < std::numeric_limits<char>::min()) || (c > std::numeric_limits<char>::max())){
 			std::cout << "Character: Impossible" << std::endl;
-		} else if (!std::isprint(static_cast<unsigned char>(number))){
+		} else if (!std::isprint(static_cast<unsigned char>(c))){
 			std::cout << "Character: Not Displayable" << std::endl;
 		} else{
-			std::cout << "Character: \'" << (static_cast<char>(number)) << "\'" << std::endl;
+			std::cout << "Character: \'" << (static_cast<char>(c)) << "\'" << std::endl;
 		}
-		std::cout << "Integer: " << (static_cast<int>(number)) << std::endl;
-		std::cout << "Float: " << (static_cast<float>(number)) << ".0f" << std::endl;
-		std::cout << "Double: " << number << ".0" << std::endl;
+		std::cout << "Integer: " << (static_cast<int>(c)) << std::endl;
+		std::cout << "Float: " << (static_cast<float>(c)) << ".0f" << std::endl;
+		std::cout << "Double: " << (static_cast<double>(c)) << ".0" << std::endl;
 		return ;
 	}
 
 	double	number = getNumber(unit);
+	bool	isIOverFlow = isIntOverflow(number);
+	bool	isFOverFlow = isFloatOverFlow(number);
+
 	if ((unitType & DOUBLE) || (unitType & FLOAT)){
-		if (unitType & EMPTY_INPUT){
-			throw ScalarConverter::UnitOverFlowException();
-		}
 		if ((number < std::numeric_limits<char>::min()) || (number > std::numeric_limits<char>::max())){
 			std::cout << "Character: Impossible" << std::endl;
 		} else if (!std::isprint(static_cast<unsigned char>(number))){
 			std::cout << "Character: Not Displayable" << std::endl;
-		number = getNumber(unit);
 		} else{
 			std::cout << "Character: \'" << (static_cast<char>(number)) << "\'" << std::endl;
 		}
-			std::cout << "Integer: " << (static_cast<int>(number)) << std::endl;
-			std::cout << "Float: " << (static_cast<float>(number)) << "f" << std::endl;
+			if (isIOverFlow){
+				std::cout << "Integer: Impossible" << std::endl;
+			} else{
+				std::cout << "Integer: " << (static_cast<int>(number)) << std::endl;
+			}
+			if (isFOverFlow){
+				std::cout << "Float: Impossible" << std::endl;
+			} else{
+				std::cout << "Float: " << (static_cast<float>(number)) << "f" << std::endl;
+			}
 			std::cout << "Double: " << number << std::endl;
 		return ;
 	}
 	if (unitType & INTEGER){
-		if (unitType & EMPTY_INPUT){
-			throw ScalarConverter::UnitOverFlowException();
-		}
 		if ((number < std::numeric_limits<char>::min()) || (number > std::numeric_limits<char>::max())){
 			std::cout << "Character: Impossible" << std::endl;
 		} else if (!std::isprint(static_cast<char>(number))){
@@ -258,16 +277,20 @@ void	ScalarConverter::convert(const std::string& unit){
 		} else{
 			std::cout << "Character: \'" << (static_cast<char>(number)) << "\'" << std::endl;
 		}
-			std::cout << "Integer: " << (static_cast<int>(number)) << std::endl;
-			std::cout << "Float: " << (static_cast<float>(number)) << ".0f" << std::endl;
+			if (isIOverFlow){
+				std::cout << "Integer: Impossible" << std::endl;
+			} else{
+				std::cout << "Integer: " << (static_cast<int>(number)) << std::endl;
+			}
+			if (isFOverFlow){
+				std::cout << "Float: Impossible" << std::endl;
+			} else{
+				std::cout << "Float: " << (static_cast<float>(number)) << ".0f" << std::endl;
+			}
 			std::cout << "Double: " << number << ".0" << std::endl;
 		return ;
 	}
 	throw ScalarConverter::InvalidUnitException();
-}
-
-const char *ScalarConverter::UnitOverFlowException::what() const throw(){
-	return ("Unit Overflow");
 }
 
 const char *ScalarConverter::EmptyArgumentException::what() const throw(){
