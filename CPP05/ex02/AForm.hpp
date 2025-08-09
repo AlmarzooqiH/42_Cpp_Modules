@@ -26,6 +26,7 @@ class AForm{
         bool isSigned;
         const int reqGrade;
         const int reqGradeToExec;
+
     public:
         AForm();
         AForm(const AForm& right);

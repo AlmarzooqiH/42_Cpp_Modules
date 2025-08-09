@@ -29,8 +29,24 @@ int main(void){
 
     AForm *shrubbery = new ShrubberyCreationForm("Collect Tax");
     AForm *bender    = new RobotomyRequestForm("Transform Into A Bender");
-    AForm *taxEvader  = slave.makeForm("p", "Tax Evader");
+    AForm *taxEvader  = nullptr;
+
+    std::cout << "Intern creating a form with invalid format" << std::endl;
     
+    try{
+        taxEvader = slave.makeForm("t", "Tax Evader");
+    } catch (std::exception& err){
+        std::cerr << err.what() << std::endl;
+    }
+    std::cout << std::endl;
+    std::cout << "Intern creating a form with valid format" << std::endl;
+
+    try{
+        taxEvader = slave.makeForm("p", "Tax Evader");
+    } catch (std::exception& err){
+        std::cerr << err.what() << std::endl;
+    }
+
     std::cout << std::endl;
     hamad.executeForm(*shrubbery);
     std::cout << std::endl;
@@ -47,6 +63,7 @@ int main(void){
     hamad.executeForm(*bender);
     std::cout << std::endl;
 
+    if (taxEvader != nullptr){
     larry.signForm(*taxEvader);
     std::cout << std::endl;
 
@@ -56,7 +73,7 @@ int main(void){
 
     hamad.signForm(*taxEvader);
     hamad.executeForm(*taxEvader);
-
+    }
     delete shrubbery;
     delete bender;
     delete taxEvader;

@@ -14,23 +14,22 @@
 #include "Form.hpp"
 
 
-int main() {
+int main(void) {
     Bureaucrat hamad;
     Bureaucrat larry("Larry", 5);
     Form    roi;
     Form    renewID("ID Renewal", 150, 1);
 
-    std::cout << std::endl;
-
-    hamad.signForm(roi);
-    std::cout << std::endl;
-
+    std::cout << "================= Bureaucrats ==========================" << std::endl;
+    std::cout << hamad << std::endl << larry << std::endl;
+    std::cout << "=================     Forms   ==========================" << std::endl;
+    std::cout << roi << std::endl << renewID << std::endl;
+    std::cout << "================= Larry will try to sign the forms =============" << std::endl;
+    larry.signForm(roi);
     larry.signForm(renewID);
-    std::cout << std::endl;
-
-    if (!renewID.getIsSigned())
-        hamad.signForm(renewID);
-    std::cout << std::endl;
+    std::cout << "================= Hamad will try to sign the forms =============" << std::endl; 
     hamad.signForm(roi);
-    return 0;
+    hamad.signForm(renewID);
+    std::cout << "================= Program end ==================================" << std::endl; 
+    return (0);
 }

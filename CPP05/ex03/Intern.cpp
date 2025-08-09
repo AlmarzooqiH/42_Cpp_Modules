@@ -6,7 +6,7 @@
 /*   By: hamalmar <hamalmar@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/30 11:35:58 by hamalmar          #+#    #+#             */
-/*   Updated: 2025/07/30 13:59:29 by hamalmar         ###   ########.fr       */
+/*   Updated: 2025/08/09 15:58:48 by hamalmar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,5 +54,5 @@ AForm*	Intern::makeForm(const std::string formName, const std::string formTarget
 }
 
 const	char	*Intern::FormNotCreatedException::what() const throw(){
-	return ("Failed To Create Form!");
+	return ("Failed To Create Form Due To Invalid Format!");
 }
