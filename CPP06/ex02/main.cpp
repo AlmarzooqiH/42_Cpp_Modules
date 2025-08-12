@@ -6,7 +6,7 @@
 /*   By: hamalmar <hamalmar@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/10 22:50:06 by hamalmar          #+#    #+#             */
-/*   Updated: 2025/08/11 00:17:09 by hamalmar         ###   ########.fr       */
+/*   Updated: 2025/08/12 17:05:32 by hamalmar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,8 @@ Base* generate(void){
         return (new A());
     } else if (randomNum % 3 == 0){
         return (new B());
-    } else {
-        return (new C());
     }
-    return (new A());
+    return (new C());
 }
 
 void    identify(Base* p){

@@ -6,7 +6,7 @@
 /*   By: hamalmar <hamalmar@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/30 20:42:27 by hamalmar          #+#    #+#             */
-/*   Updated: 2025/08/09 00:06:15 by hamalmar         ###   ########.fr       */
+/*   Updated: 2025/08/12 15:58:43 by hamalmar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,6 @@ class ScalarConverter{
 		ScalarConverter(const ScalarConverter& right);
 		ScalarConverter& operator=(const ScalarConverter& right);
 		~ScalarConverter();
-		// static int checkInputType(const std::string unit);
 		
 		public:
 			static void	convert(const std::string& unit);
