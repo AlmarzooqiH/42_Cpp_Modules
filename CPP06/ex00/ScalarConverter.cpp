@@ -6,7 +6,7 @@
 /*   By: hamalmar <hamalmar@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/31 16:51:45 by hamalmar          #+#    #+#             */
-/*   Updated: 2025/08/09 00:06:38 by hamalmar         ###   ########.fr       */
+/*   Updated: 2025/08/12 18:44:03 by hamalmar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,12 +82,18 @@ bool containsChar(const std::string& unit, const char c){
 bool checkCharacterOnly(const std::string& unit){
 	if (unit.empty())
 		return (false);
-	bool lenIsOne = unit.length() == 1;
-	bool isChar = unit[0] >= std::numeric_limits<char>::min() && unit[0] <= std::numeric_limits<char>::max();
-	bool hasDigit = std::isdigit(static_cast<unsigned char>(unit[0]));
-	if (hasDigit)
+	if (unit.length() == 1 && std::isdigit(static_cast<unsigned char>(unit[0])))
 		return (false);
-	return (lenIsOne && isChar);
+	return (
+		(
+			(unit.length() == 1) &&
+			(unit[0] >= std::numeric_limits<char>::min()) && (unit[0] <= std::numeric_limits<char>::max())
+		) ||
+		(unit.length() == 3 &&
+		(unit[0] == '\'') &&
+		(unit[1] >= std::numeric_limits<char>::min()) && (unit[1] <= std::numeric_limits<char>::max()) &&
+		(unit[2] == '\''))
+	);
 }
 
 bool checkIsNan(const std::string& unit){
@@ -230,7 +236,8 @@ void	ScalarConverter::convert(const std::string& unit){
 		return ;
 	}
 	if (unitType & CHARACTER){
-		char c = unit[0];
+		
+		char c = (unit.length() == 1) ? unit[0] : unit[1];
 		if ((c < std::numeric_limits<char>::min()) || (c > std::numeric_limits<char>::max())){
 			std::cout << "Character: Impossible" << std::endl;
 		} else if (!std::isprint(static_cast<unsigned char>(c))){

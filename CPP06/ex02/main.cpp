@@ -6,7 +6,7 @@
 /*   By: hamalmar <hamalmar@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/10 22:50:06 by hamalmar          #+#    #+#             */
-/*   Updated: 2025/08/12 17:05:32 by hamalmar         ###   ########.fr       */
+/*   Updated: 2025/08/12 17:24:22 by hamalmar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,19 +44,19 @@ void    identify(Base* p){
 
 void identify (Base& p){
     try{
-        dynamic_cast<A&>(p);
+        (void)dynamic_cast<A&>(p);
         std::cout << "P is a refernce to: A" << std::endl;
         return ;
     } catch (std::exception& err){}
 
     try{
-        dynamic_cast<B&>(p);
+        (void)dynamic_cast<B&>(p);
         std::cout << "P is a refernce to: B" << std::endl;
         return ;
     } catch (std::exception& err){}
 
     try{
-        dynamic_cast<C&>(p);
+        (void)dynamic_cast<C&>(p);
         std::cout << "P is a refernce to: C" << std::endl;
         return ;
     } catch (std::exception& err){}
