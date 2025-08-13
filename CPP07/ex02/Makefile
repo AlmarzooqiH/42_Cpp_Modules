@@ -1,4 +1,4 @@
-PROGRAM_NAME=convert
+PROGRAM_NAME=randomAccessMemorey
 
 COMPILER=c++
 STD_VERSION=c++98
