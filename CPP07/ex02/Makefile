@@ -1,9 +1,9 @@
-PROGRAM_NAME=randomAccessMemorey
+PROGRAM_NAME=arraysWithAnyType
 
 COMPILER=c++
 STD_VERSION=c++98
 FLAGS= -std=$(STD_VERSION) -Wall -Wextra -Werror
-SRC= main.cpp ScalarConverter.cpp
+SRC= main.cpp Array.hpp
 OBJS= $(SRC:.cpp=.o)
 
 all: $(PROGRAM_NAME)
