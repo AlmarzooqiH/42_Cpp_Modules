@@ -6,12 +6,9 @@
 /*   By: hamalmar <hamalmar@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/14 18:23:42 by hamalmar          #+#    #+#             */
-/*   Updated: 2025/08/14 20:46:23 by hamalmar         ###   ########.fr       */
+/*   Updated: 2025/08/16 14:12:15 by hamalmar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-#include "Array.hpp"
-
 
 template <typename T>
 Array<T>::Array() : arr(NULL), tSize(0) {}

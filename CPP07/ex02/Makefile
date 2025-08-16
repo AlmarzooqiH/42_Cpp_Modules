@@ -3,7 +3,7 @@ PROGRAM_NAME=arraysWithAnyType
 COMPILER=c++
 STD_VERSION=c++98
 FLAGS= -std=$(STD_VERSION) -Wall -Wextra -Werror
-SRC= main.cpp Array.hpp
+SRC= main.cpp
 OBJS= $(SRC:.cpp=.o)
 
 all: $(PROGRAM_NAME)
