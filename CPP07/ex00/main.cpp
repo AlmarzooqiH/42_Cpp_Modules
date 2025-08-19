@@ -6,12 +6,12 @@
 /*   By: hamalmar <hamalmar@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/11 10:04:59 by hamalmar          #+#    #+#             */
-/*   Updated: 2025/08/11 15:35:08 by hamalmar         ###   ########.fr       */
+/*   Updated: 2025/08/19 11:47:14 by hamalmar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <iostream>
-#include "Whatever.hpp"
+#include "whatever.hpp"
 
 
 /*
