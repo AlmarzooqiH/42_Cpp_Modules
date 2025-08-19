@@ -6,7 +6,7 @@
 /*   By: hamalmar <hamalmar@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/11 15:36:21 by hamalmar          #+#    #+#             */
-/*   Updated: 2025/08/13 15:55:43 by hamalmar         ###   ########.fr       */
+/*   Updated: 2025/08/19 12:53:12 by hamalmar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@
 
 template <typename Hamad, typename Function>
 void iter(Hamad* addr, size_t size, Function f){
+    if (addr == NULL)
+        return ;
     for (size_t i = 0; i < size; i++){
         f(addr[i]);
     }
@@ -23,6 +25,8 @@ void iter(Hamad* addr, size_t size, Function f){
 
 template <typename Hamad, typename Function>
 void iter(const Hamad* addr, size_t size, Function f){
+    if (addr == NULL)
+        return ;
     for (size_t i = 0; i < size; i++){
         f(addr[i]);
     }

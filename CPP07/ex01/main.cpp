@@ -6,7 +6,7 @@
 /*   By: hamalmar <hamalmar@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/11 15:36:01 by hamalmar          #+#    #+#             */
-/*   Updated: 2025/08/13 15:19:07 by hamalmar         ###   ########.fr       */
+/*   Updated: 2025/08/19 13:26:32 by hamalmar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,5 @@ int main(void){
 
     std::cout << "Printing const string Array" << std::endl;
     iter(arrCS, (sizeof(arrCS) / (sizeof(arrCS[0]))), printElement<const std::string>);
-
     return (0);
 }
