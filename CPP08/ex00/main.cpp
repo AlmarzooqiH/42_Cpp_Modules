@@ -6,7 +6,7 @@
 /*   By: hamalmar <hamalmar@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/16 22:49:37 by hamalmar          #+#    #+#             */
-/*   Updated: 2025/08/18 15:56:01 by hamalmar         ###   ########.fr       */
+/*   Updated: 2025/08/18 18:57:10 by hamalmar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 #include <iostream>
 #include <cstdlib>
 #include <ctime>
+#include <algorithm>
 
 const char *ElementNotFoundException::what() const throw(){
 	return ("Element Not Found!");
@@ -50,5 +51,25 @@ int main(void){
 		std::cerr << err.what() << std::endl;
 	}
 
+	std::cout << std::endl << "Before sorting the vector" << std::endl;
+			std::cout << "{";
+	for (size_t i = 0; i < vec.size(); i++){
+		if (i + 1 == vec.size()){
+			std::cout << vec[i] << "}" << std::endl;
+			break;
+		}
+		std::cout << vec[i] << ", " ; 
+	}
+	std::sort(vec.begin(), vec.end());
+
+	std::cout << "After sorting the vector" << std::endl;
+	std::cout << "{";
+	for (size_t i = 0; i < vec.size(); i++){
+		if (i + 1 == vec.size()){
+			std::cout << vec[i] << "}" << std::endl;
+			break;
+		}
+		std::cout << vec[i] << ", ";
+	}
 	return (0);
 }
