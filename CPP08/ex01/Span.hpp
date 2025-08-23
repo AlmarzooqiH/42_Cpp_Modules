@@ -32,6 +32,17 @@ class Span{
 		~Span();
 
 		void addNumber(int n);
+		template <typename Hamad>
+		void addNumber(Hamad start, Hamad end){
+			for (Hamad i = start; i != end; i++){
+				try{
+				this->addNumber(*i);
+				} catch (std::exception& err){
+					std::cerr << err.what() << std::endl;
+				}
+			}
+		}
+
 		int shortestSpan(void) const;
 		int longestSpan(void) const;
 

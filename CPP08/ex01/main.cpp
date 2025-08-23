@@ -30,5 +30,19 @@ int main(void){
 	}
 	std::cout << sp.shortestSpan() << std::endl;
 	std::cout << sp.longestSpan() << std::endl;
+	std::cout << std::endl << "With iterators" << std::endl;
+	Span sp2(10000);
+	std::vector<int> numbers;
+	numbers.reserve(10000);
+	for (int i = 0; i < 10000; i++)
+		numbers.push_back(std::rand() % 20031008);
+	try{
+		sp2.addNumber(numbers.begin(), numbers.end());
+	} catch (std::exception& err){
+		std::cerr << err.what() << std::endl;
+	}
+	std::cout << sp2.shortestSpan() << std::endl;
+	std::cout << sp2.longestSpan() << std::endl;
+
 	return (0);
 }
