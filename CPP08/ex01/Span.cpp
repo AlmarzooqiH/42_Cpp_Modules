@@ -64,6 +64,18 @@ int Span::longestSpan(void) const{
 	std::sort(tmp.begin(), tmp.end());
 	return (tmp.back() - tmp.front());
 }
+//This function might be used in the evaluation for visualization only.
+// void	Span::printSpan(void) const{
+// 	std::cout << "Span{";
+// 	for (size_t i = 0; i < this->v.size(); i++){
+// 		if (i == this->v.size() - 1){
+// 			std::cout << this->v[i];
+// 			break ;
+// 		}
+// 		std::cout << this->v[i] << ", ";
+// 	}
+// 	std::cout << "}" << std::endl;
+// }
 
 const char *Span::SpanIsFullException::what() const throw(){
 	return ("The Span is full. Cannot add more elements.");

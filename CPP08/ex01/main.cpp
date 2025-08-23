@@ -17,32 +17,23 @@
 
 int main(void){
 	std::srand(static_cast<unsigned int>(std::time(NULL)));
-	const size_t spanSizeOptions[] = {100, 1000, 234978, 10293, 2345927, 25000};
-	size_t spanSize = spanSizeOptions[std::rand() % 6];
+	const size_t spanSizeOptions[] = {1, 10, 100, 1000, 10000, 15000, 20000, 25000};
+	size_t spanSize = spanSizeOptions[std::rand() % 8];
 	Span sp = Span(spanSize);
 	for (size_t i = 0; i < spanSize; i++){
-		int randNumber = std::rand() % 20031008;
+		int randNumber = std::rand() % 300;
 		try{
 		sp.addNumber(randNumber);
 		} catch (std::exception& err){
 			std::cerr << err.what() << std::endl;
 		}
 	}
-	std::cout << sp.shortestSpan() << std::endl;
-	std::cout << sp.longestSpan() << std::endl;
-	std::cout << std::endl << "With iterators" << std::endl;
-	Span sp2(10000);
-	std::vector<int> numbers;
-	numbers.reserve(10000);
-	for (int i = 0; i < 10000; i++)
-		numbers.push_back(std::rand() % 20031008);
+	// sp.printSpan();
 	try{
-		sp2.addNumber(numbers.begin(), numbers.end());
+		std::cout << "Shortest Span: " << sp.shortestSpan() << std::endl;
+		std::cout << "Longest Span: " << sp.longestSpan() << std::endl;
 	} catch (std::exception& err){
 		std::cerr << err.what() << std::endl;
 	}
-	std::cout << sp2.shortestSpan() << std::endl;
-	std::cout << sp2.longestSpan() << std::endl;
-
 	return (0);
 }

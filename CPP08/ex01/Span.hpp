@@ -36,12 +36,14 @@ class Span{
 		void addNumber(Hamad start, Hamad end){
 			for (Hamad i = start; i != end; i++){
 				try{
-				this->addNumber(*i);
+					this->addNumber(*i);
 				} catch (std::exception& err){
 					std::cerr << err.what() << std::endl;
 				}
 			}
 		}
+
+		// void	printSpan(void) const;
 
 		int shortestSpan(void) const;
 		int longestSpan(void) const;
