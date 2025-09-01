@@ -32,6 +32,7 @@ class Span{
 		~Span();
 
 		void addNumber(int n);
+
 		template <typename Hamad>
 		void addNumber(Hamad start, Hamad end){
 			for (Hamad i = start; i != end; i++){
@@ -43,11 +44,16 @@ class Span{
 			}
 		}
 
-		// void	printSpan(void) const;
-
 		int shortestSpan(void) const;
 		int longestSpan(void) const;
 
+		void	printSpan(void) const;
+
+		std::vector<int>::iterator begin();
+		std::vector<int>::iterator end();
+		std::vector<int>::reverse_iterator rbegin();
+		std::vector<int>::reverse_iterator rend();
+	
 		class SpanIsFullException: public std::exception{
 			public:
 				const char *what() const throw();

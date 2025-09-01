@@ -12,7 +12,8 @@
 
 #include "Span.hpp"
 
-Span::Span(): v(), N(0){}
+Span::Span(): v(), N(0){
+}
 
 Span::Span(unsigned int N): v(), N(N){
 	this->v.reserve(N);
@@ -64,18 +65,24 @@ int Span::longestSpan(void) const{
 	std::sort(tmp.begin(), tmp.end());
 	return (tmp.back() - tmp.front());
 }
-//This function might be used in the evaluation for visualization only.
-// void	Span::printSpan(void) const{
-// 	std::cout << "Span{";
-// 	for (size_t i = 0; i < this->v.size(); i++){
-// 		if (i == this->v.size() - 1){
-// 			std::cout << this->v[i];
-// 			break ;
-// 		}
-// 		std::cout << this->v[i] << ", ";
-// 	}
-// 	std::cout << "}" << std::endl;
-// }
+// This function might be used in the evaluation for visualization only.
+void	Span::printSpan(void) const{
+	std::cout << "Span{";
+	for (size_t i = 0; i < this->v.size(); i++){
+		if (i == this->v.size() - 1){
+			std::cout << this->v[i];
+			break ;
+		}
+		std::cout << this->v[i] << ", ";
+	}
+	std::cout << "}" << std::endl;
+}
+
+
+std::vector<int>::iterator Span::begin(){return (this->v.begin());}
+std::vector<int>::iterator Span::end(){return (this->v.end());}
+std::vector<int>::reverse_iterator Span::rbegin(){return (this->v.rbegin());}
+std::vector<int>::reverse_iterator Span::rend(){return (this->v.rend());}
 
 const char *Span::SpanIsFullException::what() const throw(){
 	return ("The Span is full. Cannot add more elements.");
