@@ -6,7 +6,7 @@
 /*   By: hamalmar <hamalmar@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/28 17:02:57 by hamalmar          #+#    #+#             */
-/*   Updated: 2025/09/03 18:28:13 by hamalmar         ###   ########.fr       */
+/*   Updated: 2025/09/08 17:50:10 by hamalmar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,23 +28,36 @@
 # include <exception>
 # include <fstream>
 # include <string>
+# include <sstream>
+
+# define DBLOC "./datsa.csv"
 
 class BitcoinExchange{
 
     private:
         std::string fName;
         std::ifstream inputFile;
-        std::map<std::string, float> dateAndValues;
-        
+        std::map<std::string, float> database;
+        BitcoinExchange();
 
     public:
-        BitcoinExchange();
         BitcoinExchange(std::string& filename);
         BitcoinExchange(const BitcoinExchange& right);
         BitcoinExchange& operator=(const BitcoinExchange& right);
         ~BitcoinExchange();
 
         void    parseInput();
+
+        class DatabaseMissingException: public std::exception{
+            public:
+                const char *what() const throw();
+        };
+
+        class InvalidDatabaseFormatException: public std::exception{
+            public:
+                const char *what() const throw();
+        };
+
         class InvalidDateException: public std::exception{
             public:
                 const char *what() const throw();
