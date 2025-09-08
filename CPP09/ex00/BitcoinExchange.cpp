@@ -6,7 +6,7 @@
 /*   By: hamalmar <hamalmar@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/28 17:06:36 by hamalmar          #+#    #+#             */
-/*   Updated: 2025/09/08 17:50:32 by hamalmar         ###   ########.fr       */
+/*   Updated: 2025/09/08 23:04:37 by hamalmar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,111 @@
 
 #include "BitcoinExchange.hpp"
 
+/**
+ * @brief This function will check if the passed in date complies
+ * with YYYY-MM-DD format.
+ * 
+ * @param date The date lol.
+ * @return True if the date is in the proper format; false otherwise.
+ */
+static bool	checkDateFormat(std::string& date, size_t& mD, size_t& dD){
+	if (date.empty())
+		return (false);
+	size_t i = 0;
+	size_t yearCount = 0;
+	size_t monthCount = 0;
+	size_t dayCount = 0;
+	while ((i < date.length()) && (date[i] != '-')){
+		yearCount++;
+		i++;
+	}
+	if ((i < date.length()) && date[i] == '-') {
+		mD = i;
+		i++;
+	}
+	while ((i < date.length()) && (date[i] != '-')){
+		monthCount++;
+		i++;
+	}
+	if ((i < date.length()) && date[i] == '-') {
+		dD = i;
+		i++;
+	}
+	while ((i < date.length()) && (date[i] != '-')){
+		dayCount++;
+		i++;
+	}
+	return (
+		(yearCount >= 4) &&
+		((monthCount > 0) && (monthCount <= 2)) &&
+		((dayCount > 0) && (dayCount <= 2)) &&
+		(i == date.length())
+	);
+}
+
+/**
+ * @brief This function will check if the passed in date is a proper date.
+ * 
+ * @param date The date lol.
+ * @return True if the date is in the proper; false otherwise.
+ */
+static bool	checkPossibleDate(std::string& date, size_t& mD, size_t& dD){
+	if (date.empty())
+		return (false);
+	int year = 0;
+	int month = 0;
+	int day = 0;
+
+	std::istringstream(date.substr(0, mD)) >> year;
+	std::istringstream(date.substr(mD + 1, date.length() - dD - 1)) >> month;
+	std::istringstream(date.substr(dD + 1)) >> day;
+	// std::cout << "Year substr: " << date.substr(0, mD) << std::endl;
+	// std::cout << "Month substr: " << date.substr(mD + 1, date.length() - dD - 1) << std::endl;
+	// std::cout << "Day substr: " << date.substr(dD + 1) << std::endl;
+	// std::cout << "Year: " << year << std::endl;
+	// std::cout << "Month: " << month << std::endl;
+	// std::cout << "Day: " << day << std::endl << std::endl;
+
+	if (year < 1 || ((month < 1) || (month > 12)))
+		return (false);
+	
+	if (month == 2){
+		if ((year % 4 != 0) && (year % 100 == 0) && (year % 400 == 0)) {
+			if ((day < 1) || (day > 29))
+				return (false);
+			} else {
+				if ((day < 1) || (day > 28))
+					return (false);
+			}
+			return (true);
+	}
+	if ((day < 1) || (day > 31))
+		return (false);
+	return (true);
+}
+
+
+void	BitcoinExchange::parseInputFile(void){
+	std::string inputTmp;
+	float value = 0.0;
+	size_t mD = 0;
+	size_t dD = 0;
+
+	while (std::getline(this->inputFile, inputTmp)){
+		if (inputTmp.empty() || !std::isdigit(static_cast<int>(inputTmp[0])))
+			continue ;
+		size_t pipePos = inputTmp.find('|');
+		if (pipePos == std::string::npos)
+			throw (BitcoinExchange::InvalidInputFileException());
+		std::string inputDate = inputTmp.substr(0, pipePos - 1);
+		if (!checkDateFormat(inputDate, mD, dD))
+			throw (BitcoinExchange::InvalidDateFormatException());
+		if (!checkPossibleDate(inputDate, mD, dD))
+			throw (BitcoinExchange::InvalidDateException());
+		std::istringstream(inputTmp.substr(pipePos + 1)) >> value;
+	}
+}
+
 BitcoinExchange::BitcoinExchange(){}
 
 BitcoinExchange::BitcoinExchange(std::string& fileName){
@@ -35,7 +140,7 @@ BitcoinExchange::BitcoinExchange(std::string& fileName){
 		throw (BitcoinExchange::DatabaseMissingException());
 	std::string tmpLine;
 	while (std::getline(databaseCSV, tmpLine)){
-		if (tmpLine.empty())
+		if (tmpLine.empty() || !std::isdigit(static_cast<int>(tmpLine[0])))
 			continue ;
 		size_t commaPos = tmpLine.find(',');
 		if (commaPos == std::string::npos)
@@ -44,8 +149,10 @@ BitcoinExchange::BitcoinExchange(std::string& fileName){
 		std::string date = tmpLine.substr(0, commaPos);
 		std::istringstream(tmpLine.substr(commaPos + 1)) >> value;
 		this->database[date] = value;
+		// std::cout << date << ": " << this->database[date] << std::endl;
 	}
 	databaseCSV.close();
+	parseInputFile();
 }
 
 BitcoinExchange::BitcoinExchange(const BitcoinExchange& right){
@@ -72,9 +179,6 @@ BitcoinExchange::~BitcoinExchange(){
 
 }
 
-void BitcoinExchange::parseInput(){
-}
-
 const char	*BitcoinExchange::DatabaseMissingException::what() const throw() {
 	return ("Database file is missing. (data.csv)");
 }
@@ -97,4 +201,8 @@ const char *BitcoinExchange::InvalidBitcoinValueException::what() const throw() 
 
 const char *BitcoinExchange::FileDoesNotExistException::what() const throw() {
 	return ("File does not exist");
+}
+
+const char *BitcoinExchange::InvalidInputFileException::what() const throw(){
+	return ("The input file is not in proper format. (Date | Value)");
 }

@@ -6,7 +6,7 @@
 /*   By: hamalmar <hamalmar@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/28 17:02:57 by hamalmar          #+#    #+#             */
-/*   Updated: 2025/09/08 17:50:10 by hamalmar         ###   ########.fr       */
+/*   Updated: 2025/09/08 22:36:17 by hamalmar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@
 # include <string>
 # include <sstream>
 
-# define DBLOC "./datsa.csv"
+# define DBLOC "./data.csv"
 
 class BitcoinExchange{
 
@@ -39,14 +39,13 @@ class BitcoinExchange{
         std::ifstream inputFile;
         std::map<std::string, float> database;
         BitcoinExchange();
+        void parseInputFile(void);
 
     public:
         BitcoinExchange(std::string& filename);
         BitcoinExchange(const BitcoinExchange& right);
         BitcoinExchange& operator=(const BitcoinExchange& right);
         ~BitcoinExchange();
-
-        void    parseInput();
 
         class DatabaseMissingException: public std::exception{
             public:
@@ -74,6 +73,11 @@ class BitcoinExchange{
         };
 
         class FileDoesNotExistException: public std::exception{
+            public:
+                const char *what() const throw();
+        };
+
+        class InvalidInputFileException: public std::exception{
             public:
                 const char *what() const throw();
         };
