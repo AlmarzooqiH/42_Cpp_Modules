@@ -6,7 +6,7 @@
 /*   By: hamalmar <hamalmar@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/28 17:05:21 by hamalmar          #+#    #+#             */
-/*   Updated: 2025/09/08 21:17:05 by hamalmar         ###   ########.fr       */
+/*   Updated: 2025/09/10 17:51:08 by hamalmar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 
 int main(int ac, char **av){
 	if (ac != 2){
-		std::cerr << "Argument must be ./btc [data file]" << std::endl;
+		std::cerr << "Error: could not open file." << std::endl;
 		return (2);
 	}
 	try{

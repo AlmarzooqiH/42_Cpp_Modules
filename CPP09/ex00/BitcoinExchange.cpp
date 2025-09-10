@@ -6,7 +6,7 @@
 /*   By: hamalmar <hamalmar@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/28 17:06:36 by hamalmar          #+#    #+#             */
-/*   Updated: 2025/09/08 23:04:37 by hamalmar         ###   ########.fr       */
+/*   Updated: 2025/09/10 19:15:19 by hamalmar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,25 +106,72 @@ static bool	checkPossibleDate(std::string& date, size_t& mD, size_t& dD){
 	return (true);
 }
 
+float BitcoinExchange::getClosestValue(std::string& date, size_t& mD, size_t& dD) const{
+	int year = 0;
+	int month = 0;
+	int day = 0;
+
+	int dbYear = 0;
+	int dbMonth = 0;
+	int dbDay = 0;
+
+	std::istringstream(date.substr(0, mD)) >> year;
+	std::istringstream(date.substr(mD + 1, date.length() - dD - 1)) >> month;
+	std::istringstream(date.substr(dD + 1)) >> day;
+
+	std::map<std::string, float>::const_iterator start = this->database.begin();
+	float minValue = std::numeric_limits<float>::max();
+	while (start != this->database.end()){
+		std::istringstream(start->first.substr(0, mD)) >> dbYear;
+		std::istringstream(start->first.substr(mD + 1, date.length() - dD - 1)) >> dbMonth;
+		std::istringstream(start->first.substr(dD + 1)) >> dbDay;
+		
+		start++;
+	}
+	return (0.0);
+}
 
 void	BitcoinExchange::parseInputFile(void){
 	std::string inputTmp;
-	float value = 0.0;
+	double value = 0.0;
 	size_t mD = 0;
 	size_t dD = 0;
-
+	bool hasValue = false;
 	while (std::getline(this->inputFile, inputTmp)){
 		if (inputTmp.empty() || !std::isdigit(static_cast<int>(inputTmp[0])))
 			continue ;
 		size_t pipePos = inputTmp.find('|');
-		if (pipePos == std::string::npos)
-			throw (BitcoinExchange::InvalidInputFileException());
-		std::string inputDate = inputTmp.substr(0, pipePos - 1);
-		if (!checkDateFormat(inputDate, mD, dD))
-			throw (BitcoinExchange::InvalidDateFormatException());
-		if (!checkPossibleDate(inputDate, mD, dD))
-			throw (BitcoinExchange::InvalidDateException());
-		std::istringstream(inputTmp.substr(pipePos + 1)) >> value;
+		hasValue =  !(pipePos == std::string::npos);
+		std::string inputDate;
+		if (hasValue)
+			inputDate = inputTmp.substr(0, pipePos - 1);
+		else
+			inputDate = std::string(inputTmp);
+
+		if (!checkDateFormat(inputDate, mD, dD) || !checkPossibleDate(inputDate, mD, dD)){
+			hasValue = false;
+			std::cerr << "Error: bad input => " << inputDate << std::endl;
+			continue ;
+		}
+		if (hasValue){
+			std::istringstream(inputTmp.substr(pipePos + 1)) >> value;
+			if (value <= std::numeric_limits<int>::min() || value >= std::numeric_limits<int>::max()){
+				std::cerr << "Error: too large a number." << std::endl;
+				hasValue = false;
+				continue ;
+			}
+			if (value < 0 || value > 1000){
+				std::cerr << "Error: not a positive number." << std::endl;
+				hasValue = false;
+				continue ;
+			}
+			std::cout << inputDate << " => " << value << " => " << this->database[inputDate] * value << std::endl;
+		}
+		else{
+			value = getClosestValue(inputDate, mD, dD);
+			std::cout << inputDate << " => " << value << " => " << this->database[inputDate] * value << std::endl;
+		}
+		hasValue = false;
 	}
 }
 

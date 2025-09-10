@@ -6,7 +6,7 @@
 /*   By: hamalmar <hamalmar@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/28 17:02:57 by hamalmar          #+#    #+#             */
-/*   Updated: 2025/09/08 22:36:17 by hamalmar         ###   ########.fr       */
+/*   Updated: 2025/09/10 19:07:50 by hamalmar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ class BitcoinExchange{
         std::map<std::string, float> database;
         BitcoinExchange();
         void parseInputFile(void);
+        float getClosestValue(std::string& date, size_t& mD, size_t& dD) const;
 
     public:
         BitcoinExchange(std::string& filename);
