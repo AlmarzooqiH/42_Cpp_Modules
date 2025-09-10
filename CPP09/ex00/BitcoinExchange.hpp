@@ -6,7 +6,7 @@
 /*   By: hamalmar <hamalmar@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/28 17:02:57 by hamalmar          #+#    #+#             */
-/*   Updated: 2025/09/10 19:07:50 by hamalmar         ###   ########.fr       */
+/*   Updated: 2025/09/10 22:29:34 by hamalmar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@
 # include <fstream>
 # include <string>
 # include <sstream>
+# include <limits>
 
 # define DBLOC "./data.csv"
 
@@ -40,7 +41,7 @@ class BitcoinExchange{
         std::map<std::string, float> database;
         BitcoinExchange();
         void parseInputFile(void);
-        float getClosestValue(std::string& date, size_t& mD, size_t& dD) const;
+        float getClosestValue(const std::string& date) const;
 
     public:
         BitcoinExchange(std::string& filename);

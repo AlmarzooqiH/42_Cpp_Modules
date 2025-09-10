@@ -6,7 +6,7 @@
 /*   By: hamalmar <hamalmar@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/28 17:06:36 by hamalmar          #+#    #+#             */
-/*   Updated: 2025/09/10 19:15:19 by hamalmar         ###   ########.fr       */
+/*   Updated: 2025/09/10 22:40:48 by hamalmar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,27 +105,15 @@ static bool	checkPossibleDate(std::string& date, size_t& mD, size_t& dD){
 		return (false);
 	return (true);
 }
-
-float BitcoinExchange::getClosestValue(std::string& date, size_t& mD, size_t& dD) const{
-	int year = 0;
-	int month = 0;
-	int day = 0;
-
-	int dbYear = 0;
-	int dbMonth = 0;
-	int dbDay = 0;
-
-	std::istringstream(date.substr(0, mD)) >> year;
-	std::istringstream(date.substr(mD + 1, date.length() - dD - 1)) >> month;
-	std::istringstream(date.substr(dD + 1)) >> day;
-
+// std::cout << "Key: " << start->first << ": " << start->second << std::endl;
+float BitcoinExchange::getClosestValue(const std::string& date) const{
 	std::map<std::string, float>::const_iterator start = this->database.begin();
-	float minValue = std::numeric_limits<float>::max();
 	while (start != this->database.end()){
-		std::istringstream(start->first.substr(0, mD)) >> dbYear;
-		std::istringstream(start->first.substr(mD + 1, date.length() - dD - 1)) >> dbMonth;
-		std::istringstream(start->first.substr(dD + 1)) >> dbDay;
-		
+		if (static_cast<std::string>(start->first) > date){
+			start--;
+
+			return (static_cast<float>(start->second));
+		}
 		start++;
 	}
 	return (0.0);
@@ -168,7 +156,7 @@ void	BitcoinExchange::parseInputFile(void){
 			std::cout << inputDate << " => " << value << " => " << this->database[inputDate] * value << std::endl;
 		}
 		else{
-			value = getClosestValue(inputDate, mD, dD);
+			value = getClosestValue(inputDate);
 			std::cout << inputDate << " => " << value << " => " << this->database[inputDate] * value << std::endl;
 		}
 		hasValue = false;
