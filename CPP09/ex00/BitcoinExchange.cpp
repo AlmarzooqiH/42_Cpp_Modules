@@ -6,7 +6,7 @@
 /*   By: hamalmar <hamalmar@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/28 17:06:36 by hamalmar          #+#    #+#             */
-/*   Updated: 2025/09/10 22:40:48 by hamalmar         ###   ########.fr       */
+/*   Updated: 2025/09/11 23:39:00 by hamalmar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,9 +74,9 @@ static bool	checkDateFormat(std::string& date, size_t& mD, size_t& dD){
 static bool	checkPossibleDate(std::string& date, size_t& mD, size_t& dD){
 	if (date.empty())
 		return (false);
-	int year = 0;
-	int month = 0;
-	int day = 0;
+	int year = 1;
+	int month = 1;
+	int day = 1;
 
 	std::istringstream(date.substr(0, mD)) >> year;
 	std::istringstream(date.substr(mD + 1, date.length() - dD - 1)) >> month;
@@ -106,36 +106,51 @@ static bool	checkPossibleDate(std::string& date, size_t& mD, size_t& dD){
 	return (true);
 }
 // std::cout << "Key: " << start->first << ": " << start->second << std::endl;
-float BitcoinExchange::getClosestValue(const std::string& date) const{
+std::string BitcoinExchange::getClosestDate(const std::string& date) {
 	std::map<std::string, float>::const_iterator start = this->database.begin();
-	while (start != this->database.end()){
-		if (static_cast<std::string>(start->first) > date){
-			start--;
+	int dYear, dMonth, dDay,
+		dbYear, dbMonth, dbDay;
 
-			return (static_cast<float>(start->second));
+	std::istringstream(date.substr(0, 4)) >> dYear;
+	std::istringstream(date.substr(5, 2)) >> dMonth;
+	std::istringstream(date.substr(8,2)) >> dDay;
+	while (start != this->database.end()){
+
+	std::istringstream(static_cast<std::string>(start->first).substr(0, 4)) >> dbYear;
+	std::istringstream(static_cast<std::string>(start->first).substr(5, 2)) >> dbMonth;
+	std::istringstream(static_cast<std::string>(start->first).substr(8,2)) >> dbDay;
+		if ((dbYear == dYear) && (dbMonth == dMonth) && (dbDay > dDay)){
+			if (start != this->database.begin())
+				start--;
+			return (start->first);
 		}
 		start++;
 	}
-	return (0.0);
+	if (start == this->database.end())
+		start = this->database.begin();
+	return (start->first);
 }
 
 void	BitcoinExchange::parseInputFile(void){
 	std::string inputTmp;
-	double value = 0.0;
+	float value = 0.0;
 	size_t mD = 0;
 	size_t dD = 0;
 	bool hasValue = false;
+	bool dateInDB = false;
 	while (std::getline(this->inputFile, inputTmp)){
 		if (inputTmp.empty() || !std::isdigit(static_cast<int>(inputTmp[0])))
 			continue ;
 		size_t pipePos = inputTmp.find('|');
 		hasValue =  !(pipePos == std::string::npos);
+		if (!hasValue)
+			continue;
 		std::string inputDate;
 		if (hasValue)
 			inputDate = inputTmp.substr(0, pipePos - 1);
 		else
 			inputDate = std::string(inputTmp);
-
+		dateInDB = (this->database.find(inputDate) != this->database.end());
 		if (!checkDateFormat(inputDate, mD, dD) || !checkPossibleDate(inputDate, mD, dD)){
 			hasValue = false;
 			std::cerr << "Error: bad input => " << inputDate << std::endl;
@@ -146,23 +161,27 @@ void	BitcoinExchange::parseInputFile(void){
 			if (value <= std::numeric_limits<int>::min() || value >= std::numeric_limits<int>::max()){
 				std::cerr << "Error: too large a number." << std::endl;
 				hasValue = false;
+				dateInDB = false;
 				continue ;
 			}
 			if (value < 0 || value > 1000){
 				std::cerr << "Error: not a positive number." << std::endl;
 				hasValue = false;
+				dateInDB = false;
 				continue ;
 			}
-			std::cout << inputDate << " => " << value << " => " << this->database[inputDate] * value << std::endl;
+
+			if (!dateInDB) {
+				std::cout << inputDate << " => " << value << " => " << this->database[getClosestDate(inputDate)] * value << std::endl;
+			} else {
+				std::cout << inputDate << " => " << value << " => " << this->database[inputDate] * value << std::endl;
+			}
+			hasValue = false;
+			dateInDB = false;
+			value = 0.0;
 		}
-		else{
-			value = getClosestValue(inputDate);
-			std::cout << inputDate << " => " << value << " => " << this->database[inputDate] * value << std::endl;
-		}
-		hasValue = false;
 	}
 }
-
 BitcoinExchange::BitcoinExchange(){}
 
 BitcoinExchange::BitcoinExchange(std::string& fileName){
@@ -184,7 +203,6 @@ BitcoinExchange::BitcoinExchange(std::string& fileName){
 		std::string date = tmpLine.substr(0, commaPos);
 		std::istringstream(tmpLine.substr(commaPos + 1)) >> value;
 		this->database[date] = value;
-		// std::cout << date << ": " << this->database[date] << std::endl;
 	}
 	databaseCSV.close();
 	parseInputFile();
