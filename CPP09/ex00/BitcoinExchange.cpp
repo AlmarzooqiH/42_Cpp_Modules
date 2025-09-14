@@ -6,7 +6,7 @@
 /*   By: hamalmar <hamalmar@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/28 17:06:36 by hamalmar          #+#    #+#             */
-/*   Updated: 2025/09/11 23:39:00 by hamalmar         ###   ########.fr       */
+/*   Updated: 2025/09/14 11:09:04 by hamalmar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,12 +81,6 @@ static bool	checkPossibleDate(std::string& date, size_t& mD, size_t& dD){
 	std::istringstream(date.substr(0, mD)) >> year;
 	std::istringstream(date.substr(mD + 1, date.length() - dD - 1)) >> month;
 	std::istringstream(date.substr(dD + 1)) >> day;
-	// std::cout << "Year substr: " << date.substr(0, mD) << std::endl;
-	// std::cout << "Month substr: " << date.substr(mD + 1, date.length() - dD - 1) << std::endl;
-	// std::cout << "Day substr: " << date.substr(dD + 1) << std::endl;
-	// std::cout << "Year: " << year << std::endl;
-	// std::cout << "Month: " << month << std::endl;
-	// std::cout << "Day: " << day << std::endl << std::endl;
 
 	if (year < 1 || ((month < 1) || (month > 12)))
 		return (false);
@@ -105,20 +99,25 @@ static bool	checkPossibleDate(std::string& date, size_t& mD, size_t& dD){
 		return (false);
 	return (true);
 }
-// std::cout << "Key: " << start->first << ": " << start->second << std::endl;
+
+/**
+ * @brief This function will be called when the input date is not in the database, -
+ * this function will check the closest lower bonded date to the date input.
+ * @param date The date that we want to get the closest to it.
+ * @return The lower bonded date of @param date. If no lower bond is there we will -
+ * return the first entry. (database[0]).
+ */
 std::string BitcoinExchange::getClosestDate(const std::string& date) {
 	std::map<std::string, float>::const_iterator start = this->database.begin();
 	int dYear, dMonth, dDay,
-		dbYear, dbMonth, dbDay;
-
+	dbYear, dbMonth, dbDay;
 	std::istringstream(date.substr(0, 4)) >> dYear;
 	std::istringstream(date.substr(5, 2)) >> dMonth;
 	std::istringstream(date.substr(8,2)) >> dDay;
 	while (start != this->database.end()){
-
-	std::istringstream(static_cast<std::string>(start->first).substr(0, 4)) >> dbYear;
-	std::istringstream(static_cast<std::string>(start->first).substr(5, 2)) >> dbMonth;
-	std::istringstream(static_cast<std::string>(start->first).substr(8,2)) >> dbDay;
+		std::istringstream(static_cast<std::string>(start->first).substr(0, 4)) >> dbYear;
+		std::istringstream(static_cast<std::string>(start->first).substr(5, 2)) >> dbMonth;
+		std::istringstream(static_cast<std::string>(start->first).substr(8,2)) >> dbDay;
 		if ((dbYear == dYear) && (dbMonth == dMonth) && (dbDay > dDay)){
 			if (start != this->database.begin())
 				start--;
@@ -131,6 +130,10 @@ std::string BitcoinExchange::getClosestDate(const std::string& date) {
 	return (start->first);
 }
 
+/**
+ * @brief This function will parse the input file.
+ * @return void.
+ */
 void	BitcoinExchange::parseInputFile(void){
 	std::string inputTmp;
 	float value = 0.0;
@@ -143,8 +146,6 @@ void	BitcoinExchange::parseInputFile(void){
 			continue ;
 		size_t pipePos = inputTmp.find('|');
 		hasValue =  !(pipePos == std::string::npos);
-		if (!hasValue)
-			continue;
 		std::string inputDate;
 		if (hasValue)
 			inputDate = inputTmp.substr(0, pipePos - 1);
@@ -182,6 +183,7 @@ void	BitcoinExchange::parseInputFile(void){
 		}
 	}
 }
+
 BitcoinExchange::BitcoinExchange(){}
 
 BitcoinExchange::BitcoinExchange(std::string& fileName){
@@ -197,8 +199,10 @@ BitcoinExchange::BitcoinExchange(std::string& fileName){
 		if (tmpLine.empty() || !std::isdigit(static_cast<int>(tmpLine[0])))
 			continue ;
 		size_t commaPos = tmpLine.find(',');
-		if (commaPos == std::string::npos)
+		if (commaPos == std::string::npos){
+			databaseCSV.close();
 			throw (BitcoinExchange::InvalidDatabaseFormatException());
+		}
 		float value = 0;
 		std::string date = tmpLine.substr(0, commaPos);
 		std::istringstream(tmpLine.substr(commaPos + 1)) >> value;
@@ -240,22 +244,6 @@ const char	*BitcoinExchange::InvalidDatabaseFormatException::what() const throw(
 	return ("Database format is invalid");
 }
 
-const char *BitcoinExchange::InvalidDateException::what() const throw() {
-	return ("The date is wrong");
-}
-
-const char *BitcoinExchange::InvalidDateFormatException::what() const throw() {
-	return ("The provided date is in the wrong format, it should be in the following format: YYYY-MM-DD");
-}
-
-const char *BitcoinExchange::InvalidBitcoinValueException::what() const throw() {
-	return ("Bitcoin value must be from 0 to 1000");
-}
-
 const char *BitcoinExchange::FileDoesNotExistException::what() const throw() {
 	return ("File does not exist");
-}
-
-const char *BitcoinExchange::InvalidInputFileException::what() const throw(){
-	return ("The input file is not in proper format. (Date | Value)");
 }

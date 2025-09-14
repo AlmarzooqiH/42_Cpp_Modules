@@ -6,7 +6,7 @@
 /*   By: hamalmar <hamalmar@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/28 17:02:57 by hamalmar          #+#    #+#             */
-/*   Updated: 2025/09/11 23:00:51 by hamalmar         ###   ########.fr       */
+/*   Updated: 2025/09/14 11:06:56 by hamalmar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,27 +59,7 @@ class BitcoinExchange{
                 const char *what() const throw();
         };
 
-        class InvalidDateException: public std::exception{
-            public:
-                const char *what() const throw();
-        };
-
-        class InvalidDateFormatException: public std::exception{
-            public:
-                const char *what() const throw();
-        };
-
-        class InvalidBitcoinValueException: public std::exception{
-            public:
-                const char *what() const throw();
-        };
-
         class FileDoesNotExistException: public std::exception{
-            public:
-                const char *what() const throw();
-        };
-
-        class InvalidInputFileException: public std::exception{
             public:
                 const char *what() const throw();
         };
