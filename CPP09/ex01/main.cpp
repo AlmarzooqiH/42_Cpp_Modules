@@ -21,7 +21,7 @@ int main(int ac, char **av){
 	try{
 		std::string tmp(av[1]);
 		RPN rpn(tmp);
-
+		rpn.calculateExpression();
 	}catch (std::exception& err){
 		std::cerr << err.what() << std::endl;
 	}

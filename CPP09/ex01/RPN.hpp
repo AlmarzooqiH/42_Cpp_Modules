@@ -18,20 +18,23 @@
 # include <string>
 # include <exception>
 # include <algorithm>
+# include <sstream>
 # define VALID_INPUT "1234567890+-/*"
 
 class RPN{
 
 	private:
 		std::string expression;
-		std::stack<std::string> data;
+		std::stack<char> data;
 		RPN();
 		RPN(const RPN& right);
 		RPN& operator=(const RPN& right);
+		void	parseExpression(void);
 
 
 	public:
 		RPN(std::string& expression);
+		void	calculateExpression();
 		~RPN();
 
 		class InvalidNumberRangeException: public std::exception{
@@ -48,6 +51,15 @@ class RPN{
 			public:
 				const char *what() const throw();
 		};
+		class DivisionByZeroException: public std::exception{
+			public:
+				const char *what() const throw();
+		};
+		class NotEnoughElementsInExpressionException: public std::exception{
+			public:
+				const char *what() const throw();
+		};
+		
 };
 
 #endif
