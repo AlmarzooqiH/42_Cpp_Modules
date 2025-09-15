@@ -13,16 +13,25 @@
 #ifndef RPN_HPP
 # define RPN_HPP
 
-#include <iostream>
-#include <stack>
-#include <exception>
-#include <algorithm>
+# include <iostream>
+# include <stack>
+# include <string>
+# include <exception>
+# include <algorithm>
+# define VALID_INPUT "1234567890+-/*"
 
 class RPN{
-	public:
+
+	private:
+		std::string expression;
+		std::stack<std::string> data;
 		RPN();
 		RPN(const RPN& right);
 		RPN& operator=(const RPN& right);
+
+
+	public:
+		RPN(std::string& expression);
 		~RPN();
 
 		class InvalidNumberRangeException: public std::exception{
@@ -31,6 +40,11 @@ class RPN{
 		};
 
 		class InvalidOperationException: public std::exception{
+			public:
+				const char *what() const throw();
+		};
+
+		class EmptyExpressionException: public std::exception{
 			public:
 				const char *what() const throw();
 		};
