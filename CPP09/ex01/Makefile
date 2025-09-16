@@ -2,7 +2,7 @@ PROGRAM_NAME=RPN
 
 COMPILER=c++
 STD_VERSION=c++98
-FLAGS= -std=$(STD_VERSION) -Wall -Wextra -Werror
+FLAGS= -std=$(STD_VERSION) -Wall -Wextra -Werror -fsanitize=address
 SRC= main.cpp RPN.cpp
 OBJS= $(SRC:.cpp=.o)
 
