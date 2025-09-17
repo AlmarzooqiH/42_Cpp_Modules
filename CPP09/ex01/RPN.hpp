@@ -25,7 +25,6 @@ class RPN{
 
 	private:
 		std::string expression;
-		std::stack<char> data;
 		RPN();
 		RPN(const RPN& right);
 		RPN& operator=(const RPN& right);
@@ -55,20 +54,11 @@ class RPN{
 			public:
 				const char *what() const throw();
 		};
-		class NotEnoughElementsInExpressionException: public std::exception{
-			public:
-				const char *what() const throw();
-		};
 
 		class InvalidExpression: public std::exception{
 			public:
 				const char *what() const throw();
 		};
-
-		class CannotStartWithAnOperationException: public std::exception{
-			public:
-				const char *what() const throw();
-		};		
 };
 
 #endif
