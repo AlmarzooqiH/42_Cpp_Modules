@@ -34,20 +34,15 @@ class PmergeMe{
 		std::vector<int>	vectorContainer;
 		std::deque<int>		dequeContainer;
 		void parseInput(void);
-		void myInsertionSort(std::vector<int>& vec);
-		void myMerge(std::vector<int>& vec, std::vector<int>& leftVec, std::vector<int>& rightVec);
-
-		/* OVERLOADING FUNCTIONS*/
-
-		void myInsertionSort(std::deque<int>& deq);
-		void myMerge(std::deque<int>& deq, std::deque<int>& leftDeq, std::deque<int>& rightDeq);
+		void fordJhonsonMerge(std::vector<int>& vec, int val);
+		void fordJhonsonMerge(std::deque<int>& deq, int val);
 
 	public:
 		PmergeMe(int ac, char **av);
 		~PmergeMe();
-		
-		void myMergeSort(std::vector<int>& vec);
-		void myMergeSort(std::deque<int>& vec);
+
+		void fordJhonsonSort(std::vector<int>& vec);
+		void fordJhonsonSort(std::deque<int>& deq);
 
 		std::vector<int> getVector(void) const;
 		std::deque<int> getDeque(void) const;

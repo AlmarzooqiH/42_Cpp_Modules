@@ -39,16 +39,17 @@ int main(int ac, char **av){
 		PmergeMe yes(ac, av);
 		
 		std::vector<int> vContainer = yes.getVector();
-		std::cout << "Before: "; printContainer(vContainer);
+		// std::cout << "Before: "; printContainer(vContainer);
 		clock_t vectorStart = clock();
-		yes.myMergeSort(vContainer);
+		// yes.myMergeSort(vContainer);
+		yes.fordJhonsonSort(vContainer);
 		clock_t vectorEnd = clock();
 		std::cout << "After: "; printContainer(vContainer);
 		std::cout << "Time to process a range of " << vContainer.size() \
 			<< " elements with std::vector: " <<  (static_cast<double>(vectorEnd - vectorStart) / CLOCKS_PER_SEC) << "us" << std::endl;
 		std::deque<int> dContainer = yes.getDeque();
 		clock_t deqStart = clock();
-		yes.myMergeSort(dContainer);
+		yes.fordJhonsonSort(dContainer);
 		clock_t deqEnd = clock();
 		std::cout << "Time to process a range of " << dContainer.size() \
 			<< " elements with std::deque: " <<  (static_cast<double>(deqEnd - deqStart) / CLOCKS_PER_SEC) << "us" << std::endl;

@@ -20,108 +20,83 @@ vectorContainer(right.vectorContainer),
 dequeContainer(right.dequeContainer)
 {}
 
-void PmergeMe::myInsertionSort(std::vector<int>& vec){
-	for (size_t i = 1; i < vec.size(); i++){
-		int key = vec[i];
-
-		int j = i - 1;
-        while (j >= 0 && vec[j] > key) {
-            vec[j + 1] = vec[j];
-            j = j - 1;
-        }
-        vec[j + 1] = key;
-	}
+void	PmergeMe::fordJhonsonMerge(std::vector<int>& vec, int val){
+		std::vector<int>::iterator pos = std::lower_bound(vec.begin(), vec.end(), val);
+		vec.insert(pos, val);
 }
 
-void PmergeMe::myMerge(std::vector<int>& vec, std::vector<int>& leftVec, std::vector<int>& rightVec){
-	size_t leftPos = 0;
-	size_t rightPos = 0;
-	for (size_t i = 0; i < vec.size(); i++) {
-        if (leftPos < leftVec.size() && (rightPos >= rightVec.size() || leftVec[leftPos] <= rightVec[rightPos])) {
-            vec[i] = leftVec[leftPos];
-			leftPos++;
-        } else {
-            vec[i] = rightVec[rightPos];
-			rightPos++;
-        }
-	}
-}
-
-void PmergeMe::myMergeSort(std::vector<int>& vec){
+void	PmergeMe::fordJhonsonSort(std::vector<int>& vec){
 	if (vec.size() <= 1)
 		return ;
-	if (vec.size() <= SWITCH_THRESHOLD){
-		myInsertionSort(vec);
-		return ;
+	int oneElement = -1;
+	if (vec.size() % 2 != 0){
+		oneElement = vec.at(vec.size() - 1);
+		vec.pop_back();
 	}
-	std::vector<int> leftVec;
-	std::vector<int> rightVec;
 
-	size_t	midPos = vec.size() / 2;
-	for (size_t i = 0; i < vec.size(); i++){
-		if (i < midPos){
-			leftVec.push_back(vec[i]);
-		} else {
-			rightVec.push_back(vec[i]);
+	std::vector<int> bigger;
+	std::vector<int> smaller;
+	for (size_t i = 0; i < vec.size(); i += 2){
+		if (vec[i] > vec[i + 1]){
+			bigger.push_back(vec[i]);
+			smaller.push_back(vec[i + 1]);
+		}
+		else{
+			bigger.push_back(vec[i + 1]);
+			smaller.push_back(vec[i]);
 		}
 	}
-	myMergeSort(leftVec);
-	myMergeSort(rightVec);
-	myMerge(vec, leftVec, rightVec);
+
+	fordJhonsonSort(bigger);
+	for (size_t i = 0; i < smaller.size(); i++){
+		fordJhonsonMerge(bigger, smaller[i]);
+	}
+
+	if (oneElement != -1){
+		fordJhonsonMerge(bigger, oneElement);
+	}
+	vec = bigger;
 }
 
 /* OVERLOADING FUNCTIONS*/
 
-void PmergeMe::myInsertionSort(std::deque<int>& deq){
-	for (size_t i = 1; i < deq.size(); i++){
-		int key = deq[i];
-
-		int j = i - 1;
-        while (j >= 0 && deq[j] > key) {
-            deq[j + 1] = deq[j];
-            j = j - 1;
-        }
-        deq[j + 1] = key;
-	}
+void	PmergeMe::fordJhonsonMerge(std::deque<int>& deq, int val){
+		std::deque<int>::iterator pos = std::lower_bound(deq.begin(), deq.end(), val);
+		deq.insert(pos, val);
 }
 
-void PmergeMe::myMerge(std::deque<int>& deq, std::deque<int>& leftDeq, std::deque<int>& rightDeq){
-	size_t leftPos = 0;
-	size_t rightPos = 0;
-	for (size_t i = 0; i < deq.size(); i++) {
-        if (leftPos < leftDeq.size() && (rightPos >= rightDeq.size() || leftDeq[leftPos] <= rightDeq[rightPos])) {
-            deq[i] = leftDeq[leftPos];
-			leftPos++;
-        } else {
-            deq[i] = rightDeq[rightPos];
-			rightPos++;
-        }
-	}
-}
-
-void PmergeMe::myMergeSort(std::deque<int>& deq){
+void	PmergeMe::fordJhonsonSort(std::deque<int>& deq){
 	if (deq.size() <= 1)
 		return ;
-	if (deq.size() <= SWITCH_THRESHOLD){
-		myInsertionSort(deq);
-		return ;
+	int oneElement = -1;
+	if (deq.size() % 2 != 0){
+		oneElement = deq.at(deq.size() - 1);
+		deq.pop_back();
 	}
-	std::deque<int> leftDeq;
-	std::deque<int> rightDeq;
 
-	size_t	midPos = deq.size() / 2;
-	for (size_t i = 0; i < deq.size(); i++){
-		if (i < midPos){
-			leftDeq.push_back(deq[i]);
-		} else {
-			rightDeq.push_back(deq[i]);
+	std::deque<int> bigger;
+	std::deque<int> smaller;
+	for (size_t i = 0; i < deq.size(); i += 2){
+		if (deq[i] > deq[i + 1]){
+			bigger.push_back(deq[i]);
+			smaller.push_back(deq[i + 1]);
+		}
+		else{
+			bigger.push_back(deq[i + 1]);
+			smaller.push_back(deq[i]);
 		}
 	}
-	myMergeSort(leftDeq);
-	myMergeSort(rightDeq);
-	myMerge(deq, leftDeq, rightDeq);
-}
 
+	fordJhonsonSort(bigger);
+	for (size_t i = 0; i < smaller.size(); i++){
+		fordJhonsonMerge(bigger, smaller[i]);
+	}
+
+	if (oneElement != -1){
+		fordJhonsonMerge(bigger, oneElement);
+	}
+	deq = bigger;
+}
 
 void	PmergeMe::parseInput(void){
 	int iMin = std::numeric_limits<int>::min();
