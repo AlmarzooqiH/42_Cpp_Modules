@@ -6,7 +6,7 @@
 /*   By: hamalmar <hamalmar@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/28 17:06:36 by hamalmar          #+#    #+#             */
-/*   Updated: 2025/09/14 11:09:04 by hamalmar         ###   ########.fr       */
+/*   Updated: 2025/09/26 11:16:44 by hamalmar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,9 @@ static bool	checkDateFormat(std::string& date, size_t& mD, size_t& dD){
 /**
  * @brief This function will check if the passed in date is a proper date.
  * 
- * @param date The date lol.
+ * @param date The date lol. It is formatted as: YYYY-MM-DD.
+ * @param mD The delimeter from the YYYY.
+ * @param dD The delimeter from the MM.
  * @return True if the date is in the proper; false otherwise.
  */
 static bool	checkPossibleDate(std::string& date, size_t& mD, size_t& dD){
@@ -84,18 +86,17 @@ static bool	checkPossibleDate(std::string& date, size_t& mD, size_t& dD){
 
 	if (year < 1 || ((month < 1) || (month > 12)))
 		return (false);
-	
+
+	int maxDay = 0;
 	if (month == 2){
-		if ((year % 4 != 0) && (year % 100 == 0) && (year % 400 == 0)) {
-			if ((day < 1) || (day > 29))
-				return (false);
-			} else {
-				if ((day < 1) || (day > 28))
-					return (false);
-			}
-			return (true);
+		bool isItLeapYear = ((year % 4 == 0 && year % 100 != 0) || (year % 400 == 0));
+		maxDay = isItLeapYear ? 29 : 28;
+	} else if (month == 4 || month == 6 || month == 9 || month == 11){
+		maxDay = 30;
+	} else{
+		maxDay = 31;
 	}
-	if ((day < 1) || (day > 31))
+	if ((day < 1) || (day > maxDay))
 		return (false);
 	return (true);
 }
@@ -206,7 +207,12 @@ BitcoinExchange::BitcoinExchange(std::string& fileName){
 		float value = 0;
 		std::string date = tmpLine.substr(0, commaPos);
 		std::istringstream(tmpLine.substr(commaPos + 1)) >> value;
-		this->database[date] = value;
+		size_t mD = 0;
+		size_t dD = 0;
+		if (checkDateFormat(date, mD, dD) && checkPossibleDate(date, mD, dD))
+			this->database[date] = value;
+		else
+			std::cerr << "DB Date(" << date << ") is invalid" << std::endl;
 	}
 	databaseCSV.close();
 	parseInputFile();
