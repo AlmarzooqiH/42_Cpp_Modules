@@ -6,7 +6,7 @@
 /*   By: hamalmar <hamalmar@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/28 17:02:57 by hamalmar          #+#    #+#             */
-/*   Updated: 2025/12/05 17:25:29 by hamalmar         ###   ########.fr       */
+/*   Updated: 2025/12/10 00:33:59 by hamalmar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@
 # include <string>
 # include <sstream>
 # include <limits>
+# include <cmath>
 
 const std::string DBLOC =  "./data.csv";
 
@@ -74,8 +75,8 @@ class BitcoinExchange{
         void    parseDB(std::ifstream& databaseCSV);
         
         std::string getClosestDate(const std::string& date);
-        bool	    checkDateFormat(const std::string& date);
-        bool	    checkPossibleDate(const std::string& date);
+        bool	    checkDateFormat(const std::string& date, bool dboi);
+        bool	    checkPossibleDate(const std::string &year, const std::string &month, const std::string &day);
 
     public:
 /*
