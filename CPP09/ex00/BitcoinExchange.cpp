@@ -6,7 +6,7 @@
 /*   By: hamalmar <hamalmar@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/28 17:06:36 by hamalmar          #+#    #+#             */
-/*   Updated: 2025/09/26 11:16:44 by hamalmar         ###   ########.fr       */
+/*   Updated: 2025/12/09 15:27:38 by hamalmar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,203 +23,115 @@
 
 #include "BitcoinExchange.hpp"
 
-/**
- * @brief This function will check if the passed in date complies
- * with YYYY-MM-DD format.
- * 
- * @param date The date lol.
- * @return True if the date is in the proper format; false otherwise.
- */
-static bool	checkDateFormat(std::string& date, size_t& mD, size_t& dD){
-	if (date.empty())
-		return (false);
-	size_t i = 0;
-	size_t yearCount = 0;
-	size_t monthCount = 0;
-	size_t dayCount = 0;
-	while ((i < date.length()) && (date[i] != '-')){
-		yearCount++;
-		i++;
+size_t	countOccourance(const std::string& s, char c){
+	size_t	count = 0;
+	for (size_t i = 0; i < s.length(); i++){
+		if (s[i] == c)
+			count++;
 	}
-	if ((i < date.length()) && date[i] == '-') {
-		mD = i;
-		i++;
-	}
-	while ((i < date.length()) && (date[i] != '-')){
-		monthCount++;
-		i++;
-	}
-	if ((i < date.length()) && date[i] == '-') {
-		dD = i;
-		i++;
-	}
-	while ((i < date.length()) && (date[i] != '-')){
-		dayCount++;
-		i++;
-	}
-	return (
-		(yearCount >= 4) &&
-		((monthCount > 0) && (monthCount <= 2)) &&
-		((dayCount > 0) && (dayCount <= 2)) &&
-		(i == date.length())
-	);
+	return (count);
 }
 
-/**
- * @brief This function will check if the passed in date is a proper date.
- * 
- * @param date The date lol. It is formatted as: YYYY-MM-DD.
- * @param mD The delimeter from the YYYY.
- * @param dD The delimeter from the MM.
- * @return True if the date is in the proper; false otherwise.
- */
-static bool	checkPossibleDate(std::string& date, size_t& mD, size_t& dD){
+
+bool	BitcoinExchange::checkPossibleDate(const std::string& date){
+	(void)date;
+	return (false);
+}
+
+void	extractDate(const std::string& date, std::string& year, std::string& month, std::string& day){
+	size_t	dashPos = date.find('-');
+	size_t	begin = 0;
+	size_t	tmp = 0;
+	if (dashPos == std::string::npos)
+		throw (BitcoinExchange::InvalidDatabaseFormatException());
+	year = date.substr(begin, dashPos);
+	tmp = begin;
+	begin = dashPos;
+	dashPos = date.substr(tmp, dashPos).find('-');
+	if (dashPos == std::string::npos)
+		throw (BitcoinExchange::InvalidDatabaseFormatException());
+	month = date.substr(begin, dashPos);
+	day = date.substr(dashPos, date.size());
+}
+
+bool	BitcoinExchange::checkDateFormat(const std::string& date){
 	if (date.empty())
 		return (false);
-	int year = 1;
-	int month = 1;
-	int day = 1;
-
-	std::istringstream(date.substr(0, mD)) >> year;
-	std::istringstream(date.substr(mD + 1, date.length() - dD - 1)) >> month;
-	std::istringstream(date.substr(dD + 1)) >> day;
-
-	if (year < 1 || ((month < 1) || (month > 12)))
-		return (false);
-
-	int maxDay = 0;
-	if (month == 2){
-		bool isItLeapYear = ((year % 4 == 0 && year % 100 != 0) || (year % 400 == 0));
-		maxDay = isItLeapYear ? 29 : 28;
-	} else if (month == 4 || month == 6 || month == 9 || month == 11){
-		maxDay = 30;
-	} else{
-		maxDay = 31;
-	}
-	if ((day < 1) || (day > maxDay))
-		return (false);
+	std::string year;
+	std::string month;
+	std::string day;
+	extractDate(date, year, month, day);
+	std::cout << "Date is: {" << year << ", " << month << ", " << day << "}" << std::endl;
 	return (true);
 }
 
-/**
- * @brief This function will be called when the input date is not in the database, -
- * this function will check the closest lower bonded date to the date input.
- * @param date The date that we want to get the closest to it.
- * @return The lower bonded date of @param date. If no lower bond is there we will -
- * return the first entry. (database[0]).
- */
 std::string BitcoinExchange::getClosestDate(const std::string& date) {
-	std::map<std::string, float>::const_iterator start = this->database.begin();
-	int dYear, dMonth, dDay,
-	dbYear, dbMonth, dbDay;
-	std::istringstream(date.substr(0, 4)) >> dYear;
-	std::istringstream(date.substr(5, 2)) >> dMonth;
-	std::istringstream(date.substr(8,2)) >> dDay;
-	while (start != this->database.end()){
-		std::istringstream(static_cast<std::string>(start->first).substr(0, 4)) >> dbYear;
-		std::istringstream(static_cast<std::string>(start->first).substr(5, 2)) >> dbMonth;
-		std::istringstream(static_cast<std::string>(start->first).substr(8,2)) >> dbDay;
-		if ((dbYear == dYear) && (dbMonth == dMonth) && (dbDay > dDay)){
-			if (start != this->database.begin())
-				start--;
-			return (start->first);
-		}
-		start++;
-	}
-	if (start == this->database.end())
-		start = this->database.begin();
-	return (start->first);
+	(void)date;
+	return ("");
 }
 
 /**
- * @brief This function will parse the input file.
+ * @brief This function will parse the input file and compute to the expected result.
  * @return void.
+ * @author Hamad Almarzooqi
  */
 void	BitcoinExchange::parseInputFile(void){
-	std::string inputTmp;
-	float value = 0.0;
-	size_t mD = 0;
-	size_t dD = 0;
-	bool hasValue = false;
-	bool dateInDB = false;
-	while (std::getline(this->inputFile, inputTmp)){
-		if (inputTmp.empty() || !std::isdigit(static_cast<int>(inputTmp[0])))
-			continue ;
-		size_t pipePos = inputTmp.find('|');
-		hasValue =  !(pipePos == std::string::npos);
-		std::string inputDate;
-		if (hasValue)
-			inputDate = inputTmp.substr(0, pipePos - 1);
-		else
-			inputDate = std::string(inputTmp);
-		dateInDB = (this->database.find(inputDate) != this->database.end());
-		if (!checkDateFormat(inputDate, mD, dD) || !checkPossibleDate(inputDate, mD, dD)){
-			hasValue = false;
-			std::cerr << "Error: bad input => " << inputDate << std::endl;
-			continue ;
-		}
-		if (hasValue){
-			std::istringstream(inputTmp.substr(pipePos + 1)) >> value;
-			if (value <= std::numeric_limits<int>::min() || value >= std::numeric_limits<int>::max()){
-				std::cerr << "Error: too large a number." << std::endl;
-				hasValue = false;
-				dateInDB = false;
-				continue ;
-			}
-			if (value < 0 || value > 1000){
-				std::cerr << "Error: not a positive number." << std::endl;
-				hasValue = false;
-				dateInDB = false;
-				continue ;
-			}
-
-			if (!dateInDB) {
-				std::cout << inputDate << " => " << value << " => " << this->database[getClosestDate(inputDate)] * value << std::endl;
-			} else {
-				std::cout << inputDate << " => " << value << " => " << this->database[inputDate] * value << std::endl;
-			}
-			hasValue = false;
-			dateInDB = false;
-			value = 0.0;
-		}
-	}
 }
 
 BitcoinExchange::BitcoinExchange(){}
+
+/**
+ * @brief This function will parse the DB and store the dates with the corresp-
+ * -onding values to the cryptoWallet.
+ * @return void
+ * @author Hamad Almarzooqi
+ */
+void	BitcoinExchange::parseDB(std::ifstream& databaseCSV){
+	std::string dateBuffer;
+	bool skipFirstLine = true;
+	while (std::getline(databaseCSV, dateBuffer)){
+		std::cout << "Here 1" << std::endl;
+		if (skipFirstLine){
+			skipFirstLine = false;
+			continue ;
+		}
+		std::cout << "Here 2" << std::endl;
+		if (dateBuffer.empty())
+			break;
+		std::cout << "Here 3" << std::endl;
+		size_t	commaPos = dateBuffer.find(',');
+		if (commaPos == std::string::npos)
+			throw(BitcoinExchange::InvalidDatabaseFormatException());
+		std::cout << "Here 4" << std::endl;
+		std::string date = dateBuffer.substr(0, commaPos);
+		if (!checkDateFormat(date))
+			throw(BitcoinExchange::InvalidDatabaseFormatException());
+		std::cout << "Here 5" << std::endl;
+		float value;
+		std::istringstream(dateBuffer.substr(commaPos)) >> value;
+		if (value < 0)
+			throw(BitcoinExchange::InvalidDatabaseFormatException());
+		std::cout << "Here 6" << std::endl;
+		this->cryptoWallet[date] = value;
+		
+	}
+}
 
 BitcoinExchange::BitcoinExchange(std::string& fileName){
 	this->fName = fileName;
 	this->inputFile.open(this->fName.c_str());
 	if (!this->inputFile)
 		throw (BitcoinExchange::FileDoesNotExistException());
-	std::ifstream databaseCSV(DBLOC);
+	std::ifstream databaseCSV(DBLOC.c_str());
 	if (!databaseCSV)
 		throw (BitcoinExchange::DatabaseMissingException());
-	std::string tmpLine;
-	while (std::getline(databaseCSV, tmpLine)){
-		if (tmpLine.empty() || !std::isdigit(static_cast<int>(tmpLine[0])))
-			continue ;
-		size_t commaPos = tmpLine.find(',');
-		if (commaPos == std::string::npos){
-			databaseCSV.close();
-			throw (BitcoinExchange::InvalidDatabaseFormatException());
-		}
-		float value = 0;
-		std::string date = tmpLine.substr(0, commaPos);
-		std::istringstream(tmpLine.substr(commaPos + 1)) >> value;
-		size_t mD = 0;
-		size_t dD = 0;
-		if (checkDateFormat(date, mD, dD) && checkPossibleDate(date, mD, dD))
-			this->database[date] = value;
-		else
-			std::cerr << "DB Date(" << date << ") is invalid" << std::endl;
-	}
+	parseDB(databaseCSV);
 	databaseCSV.close();
-	parseInputFile();
+	// parseInputFile();
 }
 
 BitcoinExchange::BitcoinExchange(const BitcoinExchange& right){
-	this->database = right.database;
+	this->cryptoWallet = right.cryptoWallet;
 	this->fName = right.fName;
 	if (this->inputFile.is_open())
 		this->inputFile.close();
@@ -229,7 +141,7 @@ BitcoinExchange::BitcoinExchange(const BitcoinExchange& right){
 BitcoinExchange& BitcoinExchange::operator=(const BitcoinExchange& right){
 	if (this != &right){
 		this->fName = right.fName;
-		this->database = right.database;
+		this->cryptoWallet = right.cryptoWallet;
 		if (this->inputFile.is_open())
 			this->inputFile.close();
 		this->inputFile.open(this->fName.c_str());
