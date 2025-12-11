@@ -14,55 +14,33 @@
 # define PMERGEME_HPP
 
 # include <iostream>
-# include <exception>
 # include <vector>
 # include <deque>
 # include <ctime>
 # include <string>
 # include <sstream>
 # include <limits>
-# include <ctime>
-# define SWITCH_THRESHOLD 32
 
 class PmergeMe{
 
 	private:
+		std::vector<int> vec;
+		std::deque<int> deq;
+
 		PmergeMe();
 		PmergeMe(const PmergeMe& right);
 		PmergeMe& operator=(const PmergeMe& right);
-		std::vector<std::string> input;
-		std::vector<int>	vectorContainer;
-		std::deque<int>		dequeContainer;
-		void parseInput(void);
-		void fordJhonsonMerge(std::vector<int>& vec, int val);
-		void fordJhonsonMerge(std::deque<int>& deq, int val);
 
+		void	populateContainers(int ac, char** av);
+		bool	elementExsist(long num);
 	public:
 		PmergeMe(int ac, char **av);
 		~PmergeMe();
 
-		void fordJhonsonSort(std::vector<int>& vec);
-		void fordJhonsonSort(std::deque<int>& deq);
+		void	FordJohnsonSortVec(void);
+		void	FordJohnsonSortDeq(void);
 
-		std::vector<int> getVector(void) const;
-		std::deque<int> getDeque(void) const;
-
-		class EmptyInputException: public std::exception {
-			public:
-				const char *what() const throw();
-		};
-
-		class IntegerOverFlowException: public std::exception{
-			public:
-				const char *what() const throw();
-		};
-
-		class NegativeNumberException: public std::exception{
-			public:
-				const char *what() const throw();
-		};
-
-		class DuplicateNumberException: public std::exception{
+		class GenericErrorException: public std::exception{
 			public:
 				const char *what() const throw();
 		};
