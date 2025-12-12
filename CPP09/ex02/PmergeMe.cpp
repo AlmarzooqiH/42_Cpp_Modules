@@ -66,13 +66,56 @@ PmergeMe::PmergeMe(int ac, char** av){
 
 PmergeMe::~PmergeMe(){}
 
+std::vector<int>&	PmergeMe::getVec(void){ return (this->vec);}
+std::deque<int>&	PmergeMe::getDeq(void){ return (this->deq);}
 
-void	PmergeMe::FordJohnsonSortVec(void){
+std::vector<int>	PmergeMe::FordJohnsonSortVec(std::vector<int>& vec){
+	if (vec.size() == 1)
+		return (vec);
+	int alone = 0;
+	if (vec.size() % 2 == 1){
+		alone = vec.back();
+		vec.pop_back();
+	}
+	std::vector<int> big;
+	std::vector<int> smol;
 
+	for (std::vector<int>::iterator it = vec.begin(); it != vec.end(); it +=2 ){
+		if (*it > *(it + 1)) {
+			big.push_back(*it);
+			smol.push_back(*(it + 1));
+		} else {
+			big.push_back(*(it + 1));
+			smol.push_back(*it);
+		}
+	}
+	big = FordJohnsonSortVec(big);
+	
+	return (big);
 }
 
-void	PmergeMe::FordJohnsonSortDeq(void){
+std::deque<int>	PmergeMe::FordJohnsonSortDeq(std::deque<int>& deq){
+	if (deq.size() == 1)
+		return (deq);
+	int alone = 0;
+	if (deq.size() % 2 == 1){
+		alone = deq.back();
+		deq.pop_back();
+	}
+	std::deque<int> big;
+	std::deque<int> smol;
 
+	for (std::deque<int>::iterator it = deq.begin(); it != deq.end(); it +=2 ){
+		if (*it > *(it + 1)) {
+			big.push_back(*it);
+			smol.push_back(*(it + 1));
+		} else {
+			big.push_back(*(it + 1));
+			smol.push_back(*it);
+		}
+	}
+	big = FordJohnsonSortDeq(big);
+	return (big);
 }
 
 const char	*PmergeMe::GenericErrorException::what() const throw(){

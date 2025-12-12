@@ -20,6 +20,7 @@
 # include <string>
 # include <sstream>
 # include <limits>
+# include <algorithm>
 
 class PmergeMe{
 
@@ -37,8 +38,11 @@ class PmergeMe{
 		PmergeMe(int ac, char **av);
 		~PmergeMe();
 
-		void	FordJohnsonSortVec(void);
-		void	FordJohnsonSortDeq(void);
+		std::vector<int>&	getVec(void);
+		std::deque<int>&	getDeq(void);
+
+		std::vector<int>	FordJohnsonSortVec(std::vector<int>&	vec);
+		std::deque<int>		FordJohnsonSortDeq(std::deque<int>& deq);
 
 		class GenericErrorException: public std::exception{
 			public:
