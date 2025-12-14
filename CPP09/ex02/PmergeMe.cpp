@@ -69,10 +69,24 @@ PmergeMe::~PmergeMe(){}
 std::vector<int>&	PmergeMe::getVec(void){ return (this->vec);}
 std::deque<int>&	PmergeMe::getDeq(void){ return (this->deq);}
 
+static void binaryInsertVec(std::vector<int>& vec, int value, size_t end) {
+	size_t left = 0, right = end;
+	while (left < right) {
+		size_t mid = left + (right - left) / 2;
+		if (vec[mid] < value)
+			left = mid + 1;
+		else
+			right = mid;
+	}
+
+	vec.insert(vec.begin() + left, value);
+}
+
 std::vector<int>	PmergeMe::FordJohnsonSortVec(std::vector<int>& vec){
 	if (vec.size() == 1)
 		return (vec);
 	int alone = 0;
+	(void)alone;
 	if (vec.size() % 2 == 1){
 		alone = vec.back();
 		vec.pop_back();
@@ -90,14 +104,31 @@ std::vector<int>	PmergeMe::FordJohnsonSortVec(std::vector<int>& vec){
 		}
 	}
 	big = FordJohnsonSortVec(big);
-	
+	for (size_t i = 0; i < smol.size(); i++)
+		binaryInsertVec(big, smol[i], big.size());
+	if (alone > 0)
+		binaryInsertVec(big, alone, big.size());
 	return (big);
+}
+
+static void binaryInsertDeq(std::deque<int>& vec, int value, size_t end) {
+	size_t left = 0, right = end;
+	while (left < right) {
+		size_t mid = left + (right - left) / 2;
+		if (vec[mid] < value)
+			left = mid + 1;
+		else
+			right = mid;
+	}
+
+	vec.insert(vec.begin() + left, value);
 }
 
 std::deque<int>	PmergeMe::FordJohnsonSortDeq(std::deque<int>& deq){
 	if (deq.size() == 1)
 		return (deq);
 	int alone = 0;
+	(void)alone;
 	if (deq.size() % 2 == 1){
 		alone = deq.back();
 		deq.pop_back();
@@ -115,6 +146,10 @@ std::deque<int>	PmergeMe::FordJohnsonSortDeq(std::deque<int>& deq){
 		}
 	}
 	big = FordJohnsonSortDeq(big);
+	for (size_t i = 0; i < smol.size(); i++)
+		binaryInsertDeq(big, smol[i], big.size());
+	if (alone > 0)
+		binaryInsertDeq(big, alone, big.size());
 	return (big);
 }
 
