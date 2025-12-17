@@ -28,7 +28,6 @@ class RPN{
 		RPN();
 		RPN(const RPN& right);
 		RPN& operator=(const RPN& right);
-		void	parseExpression(void);
 
 
 	public:

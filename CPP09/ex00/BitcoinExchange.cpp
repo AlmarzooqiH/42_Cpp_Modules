@@ -6,7 +6,7 @@
 /*   By: hamalmar <hamalmar@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/28 17:06:36 by hamalmar          #+#    #+#             */
-/*   Updated: 2025/12/10 01:00:42 by hamalmar         ###   ########.fr       */
+/*   Updated: 2025/12/17 19:29:41 by hamalmar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,12 +96,12 @@ bool	BitcoinExchange::checkDateFormat(const std::string& date, bool dboi){
 	std::string month;
 	std::string day;
 	if (!extractDate(date, year, month, day)){
-		std::cout << "Error: Could not extract the date from: " << date << std::endl;
+		std::cerr << "Error: Could not extract the date from: " << date << std::endl;
 		return (false);
 	}
 	if (!checkPossibleDate(year, month, day)){
 		if (dboi)
-			std::cout << "Error: Date is invalid: " << date << std::endl;
+			std::cerr << "Error: Date is invalid: " << date << std::endl;
 		return (false);
 	}
 	return (true);
@@ -137,21 +137,21 @@ void	BitcoinExchange::parseInputFile(void){
 		std::string date = dateBuffer.substr(0, pipePos);
 
 		if (pipePos == std::string::npos){
-			std::cout << "Error: bad input => " << date << std::endl;
+			std::cerr << "Error: bad input => " << date << std::endl;
 			continue;
 		}
 		if (!checkDateFormat(date, false)){
-			std::cout << "Error: bad input => " << date << std::endl;
+			std::cerr << "Error: bad input => " << date << std::endl;
 			continue;
 		}
 		float value;
 		std::istringstream(dateBuffer.substr(pipePos + 1)) >> value;
 		if (value < 0){
-			std::cout << "Error: not a positive number." << std::endl;
+			std::cerr << "Error: not a positive number." << std::endl;
 			continue ;
 		}
 		if (value > 1000){
-			std::cout << "Error: too large a number." << std::endl;
+			std::cerr << "Error: too large a number." << std::endl;
 			continue ;
 		}
 		std::cout << date << " => " << value << " = " << this->cryptoWallet[getClosestDate(date)] * value << std::endl;
@@ -175,10 +175,10 @@ void	BitcoinExchange::parseDB(std::ifstream& databaseCSV){
 			continue ;
 		}
 		if (dateBuffer.empty())
-			break;
+			continue ;
 		size_t	commaPos = dateBuffer.find(',');
 		if (commaPos == std::string::npos){
-			std::cout << "Invalid DB format: " << dateBuffer << std::endl;
+			std::cerr << "Invalid DB format: " << dateBuffer << std::endl;
 			continue;
 		}
 		std::string date = dateBuffer.substr(0, commaPos);
@@ -188,7 +188,7 @@ void	BitcoinExchange::parseDB(std::ifstream& databaseCSV){
 		float value;
 		std::istringstream(dateBuffer.substr(commaPos + 1)) >> value;
 		if (value < 0){
-			std::cout << "Invalid Value: " << value << std::endl;
+			std::cerr << "Invalid Value: " << value << std::endl;
 			continue;
 		}
 		this->cryptoWallet[date] = value;
